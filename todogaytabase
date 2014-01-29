@@ -1,0 +1,9 @@
+TODAY
+(4) Port templates and comment out Jinja for data
+(5) Create views.py/routes.py JUST to view each type of object's page
+
+TOMORROW
+(1) Port populate db document
+(2) Add sample data
+(3) Add data back in to views
+(4) Port Jinja templating into Django templating for all templates
