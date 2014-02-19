@@ -1,0 +1,36 @@
+{% extends "menubase.html" %}
+
+{% block content %}
+<div class="contentholder">
+	<div class="formheader"><h2>Places</h2></div>
+		<div class="menupage">
+
+
+		<p><br><br><b>Senate Districts</b></p>
+				{% for senatedistrict in senatedistricts %}
+					<a href="{{ url_for('SD', shortcode=senatedistrict.number) }}">{{senatedistrict.shortcode}}</a> - 
+				{% endfor %}
+
+		<p><br><br><b>House Districts</b></p>
+				{% for housedistrict in housedistricts %}
+					<a href="{{ url_for('HD', shortcode=housedistrict.shortcode) }}">{{housedistrict.shortcode}}</a> - 
+				{% endfor %}
+
+		<p><br><br><b>Counties</b></p>
+				{% for county in counties %}
+					<a href="{{ url_for('county', name=county.name) }}">{{county.name}}</a> - 
+				{% endfor %}
+
+		<p><br><br><b>Cities</b></p>
+
+				{% for city in cities %}
+					<a href="{{ url_for('city', name=city.name) }}">{{city.name}}</a> - 
+				{% endfor %}
+		</div>
+
+</div>
+
+
+<br><br><br><br><br>
+
+{% endblock %}

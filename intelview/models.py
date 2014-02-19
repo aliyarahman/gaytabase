@@ -7,32 +7,14 @@ class User(models.Model):
 	password = models.CharField(max_length=45)
 	firstname = models.CharField(max_length=45)
 	lastname = models.CharField(max_length=45)
-	timestamp = models.DateTimeField('date account created')
 
 	def __unicode__(self):
 		return self.firstname
 
-'''	
-	def __repr__(self):
-		return '%r' % (self.firstname)
-		
-	def is_active(self):
-		return True
-	def is_authenticated(self):
-		return True
-	def is_anonymous(self):
-		return False
-
-	def get_id(self):
-		return self.id
-'''		
-
-
 class Region(models.Model):
 	name = models.CharField(max_length=15, unique = True)
 	shortcode = models.CharField(max_length=4)
-	otherNotes = models.CharField(max_length=400)
-		
+	otherNotes = models.CharField(max_length=400, default = "")
 	def __unicode__(self):
 		return self.name
 
@@ -40,8 +22,8 @@ class Region(models.Model):
 class County(models.Model):
 	name = models.CharField(max_length=30, unique = True)
 	region = models.ForeignKey(Region)
-	population = models.IntegerField(max_length=7)
-	otherNotes = models.CharField(max_length=400)
+#	population = models.IntegerField(max_length=7, default=0)
+	otherNotes = models.CharField(max_length=400, default = "")
 	localLegislation = models.CharField(max_length=400, default = "N/A")
 
 	def __unicode__(self):
@@ -53,32 +35,23 @@ class City(models.Model):
 	name = models.CharField(max_length=30, unique = True)
 	county = models.ForeignKey(County)
 	region = models.ForeignKey(Region)
-	population = models.IntegerField(max_length=7)
-	localLegislation = models.CharField(max_length=400)
-	otherNotes = models.CharField(max_length=400)
-	timestamp = models.DateTimeField('date published')
+	population = models.IntegerField(max_length=7, default = 0)
+	localLegislation = models.CharField(max_length=400, default = "N/A")
+	otherNotes = models.CharField(max_length=400, default = "")
 
 	def __unicode__(self):
 		return self.name
-
-
 
 class SenateDistrict(models.Model):
 	number = models.IntegerField()
 	shortcode = models.CharField(max_length=4)
 	region = models.ForeignKey(Region)
-	DPI = models.CharField(max_length=7)
-	population = models.IntegerField()
-	Latino_VAP = models.IntegerField()
-	AA_VAP = models.IntegerField()
-	percentEmployment = models.IntegerField()
+	DPI = models.CharField(max_length=7, default = 0)
 	cities = models.ManyToManyField(City)
-	counties = models.ManyToManyField(County)
-	timestamp = models.DateTimeField('date published')
+	counties = models.ManyToManyField(County, default = [])
 	
 	def __unicode__(self):
 		return self.shortcode
-
 
 
 class HouseDistrict(models.Model):
@@ -87,13 +60,8 @@ class HouseDistrict(models.Model):
 	region = models.ForeignKey(Region)
 	nestedInSD = models.ForeignKey(SenateDistrict)
 	DPI = models.CharField(max_length=7)
-	votingPopulation = models.IntegerField()
-	Latino_VAP = models.IntegerField()
-	AA_VAP = models.IntegerField()
-	percentEmployment = models.CharField(max_length=7)
 	cities = models.ManyToManyField(City)
-	counties = models.ManyToManyField(County)
-	timestamp = models.DateTimeField('date published')
+	counties = models.ManyToManyField(County, default = [])
 
 	def __unicode__(self):
 		return self.shortcode
@@ -130,7 +98,6 @@ class Senator(models.Model):
 	officeEmail = models.CharField(max_length=400)
 	personalEmail = models.CharField(max_length=400)
 	otherNotes = models.CharField(max_length=400)
-	timestamp = models.DateTimeField('date published')
 
 	def __unicode__(self):
 		return self.lastname
@@ -169,7 +136,6 @@ class Representative(models.Model):
 	officeEmail = models.CharField(max_length=400)
 	personalEmail = models.CharField(max_length=400)
 	otherNotes = models.CharField(max_length=400)
-	timestamp = models.DateTimeField('date published')
 
 	def __unicode__(self):
 		return self.shortcode
@@ -183,7 +149,7 @@ class Business(models.Model):
 	CEO = models.CharField(max_length=400)
 	peopleConnections = models.CharField(max_length=400)
 	regions = models.ManyToManyField(Region)
-	counties = models.ManyToManyField(County)
+	counties = models.ManyToManyField(County, default = [])
 	cities = models.ManyToManyField(City)
 	inSDs = models.ManyToManyField(SenateDistrict)
 	inHDs = models.ManyToManyField(HouseDistrict)
@@ -208,12 +174,11 @@ class Organization(models.Model):
 	ally = models.IntegerField(max_length=1)
 	primaryContact = models.CharField(max_length=400)
 	regions = models.ManyToManyField(Region)
-	counties = models.ManyToManyField(County)
+	counties = models.ManyToManyField(County, default = [])
 	cities = models.ManyToManyField(City)
 	inSDs = models.ManyToManyField(SenateDistrict)
 	inHDs = models.ManyToManyField(HouseDistrict)
 	otherNotes = models.CharField(max_length=400)
-	timestamp = models.DateTimeField('date published')
 		
 	def __unicode__(self):
 		return self.name
@@ -237,7 +202,6 @@ class Leader(models.Model):
 	denomination = models.CharField(max_length=400)
 	organizations = models.ManyToManyField(Organization)
 	otherNotes = models.CharField(max_length=400)
-	timestamp = models.DateTimeField('date published')
 	
 	def __unicode__(self):
 		return self.firstname

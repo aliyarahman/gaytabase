@@ -58,8 +58,8 @@ WSGI_APPLICATION = 'gaytabase.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gaytabase',
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': 'gaytabase',
 	'USER': 'root',
 	'PASSWORD': 'Popcorn13',
 	'HOST': 'localhost',
@@ -84,4 +84,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/intelview/'
+
+TEMPLATE_DIRS = '/home/aliya/gitrepos/gaytabase/intelview/templates/intelview'

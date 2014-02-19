@@ -1,0 +1,25 @@
+{% extends "menubase.html" %}
+
+{% block content %}
+<div class="contentholder">
+	<h2>Your Gaytabase intel</h2>
+</div>
+
+<div id="buttonholder">
+	<a href="{% url 'places' %}"><div class="componentbutton">PLACES
+	<div class="details">Districts, Regions, Counties, Cities.</div></div></a>
+	
+	<a href="{% url 'legislators' %}"><div class="componentbutton">LEGISLATORS
+	<div class="details">State-level elected officials.</div></div></a>
+	
+	<a href="{% url 'leaders' %}"><div class="componentbutton">LEADERS
+	<div class="details">Faith, community, and volunteer.</div></div></a>
+	
+	<a href="{% url 'businesses' %}"><div class="componentbutton">BUSINESSES
+	<div class="details">Corporate and local.</div></div></a>
+
+	<a href="{% url 'groups' %}"><div class="componentbutton">GROUPS
+	<div class="details">Partners, allies,and not-so-allies</div></div></a>
+</div>
+
+{% endblock %}

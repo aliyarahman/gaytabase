@@ -1,0 +1,20 @@
+{% extends "menubase.html" %}
+
+{% block content %}
+<div class="contentholder">
+	<h2>Businesses</h2>
+</div>
+
+<div id="buttonholder">
+	<a href="{{ url_for('businesses') }}"><div class="componentbutton">SMALL BUSINESS
+	<div class="details">Local and family-owned</div></div></a>
+	
+	<a href="{{ url_for('businesses') }}"><div class="componentbutton">CORPORATE
+	<div class="details">Big business</div></div></a>
+	
+	<a href="{{ url_for('businesses') }}"><div class="componentbutton"> JOBSOHIO
+	<div class="details">The Kasich list</div></div></a>
+	
+</div>
+
+{% endblock %}
