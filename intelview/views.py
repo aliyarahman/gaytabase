@@ -6,77 +6,63 @@ from intelview.models import User, Region, County, City, SenateDistrict, HouseDi
 def index(request):
 	return render(request, 'index.html')
 
+#Menu pages
 def places(request):
-	return render(request, "places-menu.html")
+	senatedistricts = SenateDistrict.objects.all()
+	housedistricts = HouseDistrict.objects.all()
+	regions = Region.objects.all()
+	counties = County.objects.all()
+	cities = City.objects.all()
+	return render(request, 'places-menu.html', {'senatedistricts':senatedistricts, 'housedistricts':housedistricts, 'regions':regions, 'counties':counties, 'cities':cities})
 
-#	cities = City.query.all()
-#	counties = County.query.all()
-#	senatedistricts = SenateDistrict.query.all()
-#	housedistricts = HouseDistrict.query.all()
-	# should include, cities = cities, counties=counties, senatedistricts=senatedistricts, housedistricts = housedistricts)
-'''
-def SD(shortcode):
-	senatedistrict = SenateDistrict.query.filter_by(number=shortcode).first()
-	legislator = Senator.query.filter_by(id = senatedistrict.representedBy).first()
-	return render(request, 'SD.html', senatedistrict = senatedistrict, legislator = legislator)
-
-def HD(shortcode):
-	housedistrict = HouseDistrict.query.filter_by(shortcode=shortcode).first()
-	legislator = Representative.query.filter_by(id = housedistrict.representedBy).first()
-	return render(request, 'HD.html', housedistrict = housedistrict, legislator = legislator)
-	
-def city(name):
-	city = City.query.filter_by(name=name).first()
-	return render(request, 'city.html', city=city)
-
-def county(name):
-	county = County.query.filter_by(name=name).first()
-	return render(request, 'county.html', county=county)
-'''
 def legislators(request):
-	senators = Senator.objects.all()
-	representatives = Representative.objects.all()
-	return render(request, "legislators-menu.html", senators = senators, representatives = representatives)
-	# should include, senators = senators, representatives=representatives)
-'''
-def Sen(id):
-	senator = Senator.query.filter_by(id=id).first()
-	return render(request, 'Senator.html', senator = senator)
+	Senators = Senator.objects.all()
+	Representatives = Representative.objects.all()
+	return render(request, "legislators-menu.html", {'Senators': Senators, 'Representatives':Representatives})
 
-def Rep(id):
-	representative = Representative.query.filter_by(id=id).first()
-	hd = HouseDistrict.query.filter_by(id = representative.id)
-	return render(request, 'Representative.html', representative = representative, hd = hd)
-'''
-def businesses(request):
-	return render(request, "businesses-menu.html")
-'''
-def business(name):
-#	business = Business.query.filter_by(name=name).first()
-	return render(request, 'business.html')
-	# should include, business=business)
-'''
 def leaders(request):
-	return render(request, "leaders-menu.html")
-'''
-def leader(id):
-	leader = Leader.query.filter_by(id=id).first()
-	return render(request, 'leader.html', leader=leader)
-'''
-def groups(request):
-	return render(request, "groups-menu.html")
+	leaders = Leader.objects.all()
+	return render(request, "leaders-menu.html", {'leaders': leaders})
 
-'''def group(name):
-	group = Group.query.filter_by(name=name).first()
-	return render(request, 'group.html', group=group)
-'''
+def businesses(request):
+	businesses = Business.objects.all()
+	return render(request, "businesses-menu.html", {'businesses': businesses})
+
+def organizations(request):
+	organizations = Organization.objects.all()
+	return render(request, "organizations-menu.html", {'organizations': organizations})
+
+#Banner pages
 def help(request):
 	return render(request, "help.html")
 
-def forgot(request):
-	return render(request, "forgot.html")
-'''
-def logout():
-	logout_user()
-	return redirect(url_for('index'))
-	'''
+#Individual place pages
+def SDView(request):
+	return render(request, "SD.html")
+
+def HDView(request):
+	return render(request, "HD.html")
+
+def regionView(request):
+	return render(request, "region.html")
+
+def countyView(request):
+	return render(request, "county.html")
+
+def cityView(request):
+	return render(request, "city.html")
+
+def SenatorView(request):
+	return render(request, "Senator.html")
+	
+def RepresentativeView(request):
+	return render(request, "Representative.html")
+	
+def businessView(request):
+	return render(request, "business.html")
+	
+def organizationView(request):
+	return render(request, "organization.html")
+	
+def leaderView(request):
+	return render(request, "leader.html")

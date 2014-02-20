@@ -82,7 +82,7 @@ class Senator(models.Model):
 	lobbyDay2013Intel = models.CharField(max_length=400)
 	committees2014 = models.CharField(max_length=400)
 	upin2014  = models.CharField(max_length=4)
-	termLimit = models.IntegerField(max_length=4)
+	termLimit = models.IntegerField(max_length=4, default = 0)
 	previousTerms = models.CharField(max_length=400)
 	livesInCity = models.IntegerField()
 	faithAffiliation = models.CharField(max_length=400)
@@ -172,14 +172,16 @@ class Organization(models.Model):
 	LocalStateNationalAffinity = models.CharField(max_length=40)
 	description = models.CharField(max_length=400)
 	ally = models.IntegerField(max_length=1)
+# add column for affinity group
+# add column for conservative
+# add column for nonprofit
 	primaryContact = models.CharField(max_length=400)
 	regions = models.ManyToManyField(Region)
 	counties = models.ManyToManyField(County, default = [])
 	cities = models.ManyToManyField(City)
 	inSDs = models.ManyToManyField(SenateDistrict)
 	inHDs = models.ManyToManyField(HouseDistrict)
-	otherNotes = models.CharField(max_length=400)
-		
+	otherNotes = models.CharField(max_length=400)		
 	def __unicode__(self):
 		return self.name
 

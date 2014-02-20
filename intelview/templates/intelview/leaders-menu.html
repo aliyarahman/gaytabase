@@ -2,19 +2,36 @@
 
 {% block content %}
 <div class="contentholder">
-	<h2>Leaders</h2>
+	<div class="formheader"><h2>Leaders</h2></div>
+		<div class="menupage">
+
+		<p><br><br><b>Volunteer leaders</b></p>
+				{% for leader in leaders %}
+					{% if leader.volunteerleader == 1 %}
+						<a href="{% url 'leaderView' %}">{{leader.firstname}} {{leader.lastname}}</a> - 
+					{% endif %}
+				{% endfor %}
+				
+
+		<p><br><br><b>Faith leaders</b></p>
+				{% for leader in leaders %}
+					{% if leader.faithleader == 1 %}
+						<a href="{% url 'leaderView' %}">{% if leader.tite %}{{leader.tite}} {% endif %}{{leader.firstname}} {{leader.lastname}}</a> - 
+					{% endif %}
+				{% endfor %}
+
+		<p><br><br><b>Community leaders</b></p>
+				{% for leader in leaders %}
+					{% if leader.communityleader == 1 %}
+						<a href="{% url 'leaderView' %}">{{leader.firstname}} {{leader.lastname}}</a> - 
+					{% endif %}
+				{% endfor %}
+				
+		</div>
+
 </div>
 
-<div id="buttonholder">
-	<a href="{% url 'leaders' %}"><div class="componentbutton">FAITH
-	<div class="details">Clergy and lay leaders</div></div></a>
-	
-	<a href="{% url 'leaders' %}"><div class="componentbutton">COMMUNITY
-	<div class="details">Grasstops leaders</div></div></a>
-	
-	<a href="{% url 'leaders' %}"><div class="componentbutton"> VOLUNTEER
-	<div class="details">Affinity group leads and supervolunteers</div></div></a>
-	
-</div>
+
+<br><br><br><br><br>
 
 {% endblock %}

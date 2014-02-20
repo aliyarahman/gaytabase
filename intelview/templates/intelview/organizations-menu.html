@@ -1,0 +1,43 @@
+{% extends "menubase.html" %}
+
+{% block content %}
+<div class="contentholder">
+	<div class="formheader"><h2>Groups</h2></div>
+		<div class="menupage">
+
+		<p><br><br><b>Affinity groups</b></p>
+				{% for organization in organizations %}
+					{% if organization.name == "SHADES" %}
+						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+					{% endif %}
+				{% endfor %}
+
+		<p><br><br><b>Nonprofits</b></p>
+				{% for organization in organizations %}
+					{% if organization.name == "PFLAG" or organization.name = "Citizens for Community Values" %}
+						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+					{% endif %}
+				{% endfor %}
+
+		<p><br><br><b>Progressive allies</b></p>
+				{% for organization in organizations %}
+					{% if organization.ally == 1 %}
+						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+					{% endif %}
+				{% endfor %}
+				
+				
+		<p><br><br><b>Conservatives</b></p>
+				{% for organization in organizations %}
+					{% if organization.name == "Citizens for Community Values" %}
+						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+					{% endif %}
+				{% endfor %}				
+		</div>
+
+</div>
+
+
+<br><br><br><br><br>
+
+{% endblock %}

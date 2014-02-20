@@ -5,26 +5,29 @@
 	<div class="formheader"><h2>Places</h2></div>
 		<div class="menupage">
 
-
 		<p><br><br><b>Senate Districts</b></p>
 				{% for senatedistrict in senatedistricts %}
-					<a href="{{ url_for('SD', shortcode=senatedistrict.number) }}">{{senatedistrict.shortcode}}</a> - 
+					<a href="{% url 'SDView' %}">{{senatedistrict.shortcode}}</a> - 
 				{% endfor %}
 
 		<p><br><br><b>House Districts</b></p>
 				{% for housedistrict in housedistricts %}
-					<a href="{{ url_for('HD', shortcode=housedistrict.shortcode) }}">{{housedistrict.shortcode}}</a> - 
+					<a href="{% url 'HDView' %}">{{housedistrict.shortcode}}</a> - 
+				{% endfor %}
+
+		<p><br><br><b>Regions</b></p>
+				{% for region in regions %}
+					<a href="{% url 'regionView' %}">{{region.name}}</a> - 
 				{% endfor %}
 
 		<p><br><br><b>Counties</b></p>
 				{% for county in counties %}
-					<a href="{{ url_for('county', name=county.name) }}">{{county.name}}</a> - 
+					<a href="{% url 'countyView' %}">{{county.name}}</a> - 
 				{% endfor %}
 
 		<p><br><br><b>Cities</b></p>
-
 				{% for city in cities %}
-					<a href="{{ url_for('city', name=city.name) }}">{{city.name}}</a> - 
+					<a href="{% url 'cityView' %}">{{city.name}}</a> - 
 				{% endfor %}
 		</div>
 

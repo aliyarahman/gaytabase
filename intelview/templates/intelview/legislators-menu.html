@@ -2,20 +2,21 @@
 
 {% block content %}
 <div class="contentholder">
-	<div class="formheader"><h2>State Legislators</h2></div>
-	<h3> Target legislators appear <span class="bluetext">in blue.</span></h3>
-	
+	<div class="formheader"><h2>Legislators</h2></div>
+		<div class="menupage">
+
 		<p><br><br><b>Senators</b></p>
-				<div class="legislatorlist"><ul>{% for s in senators %}
-					<div class="namebutton {% if s.EHEAtarget==1 %}target{% endif %}"><a href="{{ url_for('Sen', id=s.id) }}">{{s.lastname}} ({{s.party}})</a></div>
-				{% endfor %}</ul></div>
+				{% for Senator in Senators %}
+					<a href="{% url 'SenatorView' %}">{{Senator.lastname}}</a> - 
+				{% endfor %}
 
 		<p><br><br><b>House Representatives</b></p>
-				<div class="legislatorlist"><ul>{% for r in representatives %}
-					<div class="namebutton {% if r.EHEAtarget==1 %}target{% endif %}"><a href="{{ url_for('Rep', id=r.id) }}">{{r.lastname}} ({{r.party}})</a></div>
-				{% endfor %}</ul></div>
+				{% for Representative in Representatives %}
+					<a href="{% url 'RepresentativeView' %}">{{Representative.lastname}}</a> - 
+				{% endfor %}
 
 		</div>
+
 </div>
 
 
