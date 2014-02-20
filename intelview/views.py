@@ -1,5 +1,7 @@
 # Import resources
 from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 from intelview.models import User, Region, County, City, SenateDistrict, HouseDistrict, Senator, Representative, Business, Organization, Leader
 
 # Landing page (see this after login)
@@ -47,7 +49,8 @@ def regionView(request):
 	return render(request, "region.html")
 
 def countyView(request):
-	return render(request, "county.html")
+	county = County.objects.get(name="Adams")
+	return render(request, "county.html", {'county': county})
 
 def cityView(request):
 	return render(request, "city.html")
