@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "menubase.html" %}
 {% block content %}
 	
 	<div class="contentholder">
 		<div class="formheader"><h2>Forgot your login info?</h2></div>
 		<p>Send an email to <a class="graylink" href="mailto:action@equalityohio.org?subject=Forgot login info"><b>action@equalityohio.org</b></a>.</p></div>
-		<button class="advance" type="button"><span id="finished">OK?</span>Click to go back to the login screen.</button>
+		<a href="{% url 'index' %}" style="text-decoration: none"><b>Click to go back to the login screen.</b></a>
 	</div>
 
 {% endblock %}
