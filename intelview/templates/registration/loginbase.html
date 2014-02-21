@@ -1,0 +1,36 @@
+<!doctype html>
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Equality Ohio - Gaytabase</title>
+                <link rel="stylesheet" type="text/css" href="{% static 'intelview/style.css' %}" />
+
+	</head>
+	
+<body>
+
+	<div id="banner">
+		<span class="navbutton" id="bannerspace"></span>
+		<a href="{% url 'help' %}"><button class="navbutton">Get help</button></a>
+
+		{% if user.is_anonymous %}
+		<a href="{% url 'logout' %}"><button class="navbutton">Log out</button></a>
+		{% else %}
+		<a href="{% url 'login' %}"><button class="navbutton">Log in</button></a>
+		{% endif %}
+		
+	</div>
+
+	<div id="header">
+		<div id="triangle"></div>
+		<img id="brainlogo" src="{{ url_for('static', filename='bannerbrain.png')}}" height=200px;>
+
+	</div>
+
+	<div id="content">
+		{% block content %}{% endblock %}
+	</div>
+
+</body>
+</html>

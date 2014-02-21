@@ -1,15 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+''' Django has custom User object, and its fields are:
 class User(models.Model):
-	#Django gives id = models.AutoField(primary_key = True)
-	role = models.IntegerField(default =1)
-	email = models.CharField(max_length=45, unique=True)
-	password = models.CharField(max_length=45)
-	firstname = models.CharField(max_length=45)
-	lastname = models.CharField(max_length=45)
-
-	def __unicode__(self):
-		return self.firstname
+	username
+	password
+	email
+	first_name
+	last_name'''
 
 class Region(models.Model):
 	name = models.CharField(max_length=15, unique = True)

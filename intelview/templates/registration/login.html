@@ -7,8 +7,8 @@
 		{% endif %}
 	</div>
 	
-	<div class="contentholder">
-		<h2>Log in to your Gaytabase IntelView account</h2>
+	<div class="contentholder"><br><br><br>
+		<h2>Log in to your Gaytabase account</h2>
 	</div>
 
 		
@@ -16,10 +16,9 @@
 	{% csrf_token %}
 
 	<div id="loginbox">
-
-		<p>{{form.username.label.tag }} {{form.username }}
-		<p>{{form.password.label.tag }} {{form.password }}
-		<p><input type="submit" value="Log in">
+		<p>{{form.username.label}} {{form.username }}
+		<p>{{form.password.label }} {{form.password }}
+		<p><input type="submit" value="LOG IN"></br>
 		<input type="hidden" name="next" value="{{ next }}" />
 		</form>
 

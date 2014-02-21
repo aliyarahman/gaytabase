@@ -1,8 +1,11 @@
 from django.conf.urls import patterns, url, include
 from intelview import views
 
+
 urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
+	url('login', 'django.contrib.auth.views.login'),
+	url('logout', 'django.contrib.auth.views.logout'),
 	url('index', views.index, name='index'),
 	url('places', views.places, name='places'),
 	url('legislators', views.legislators, name='legislators'),
