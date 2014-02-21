@@ -6,9 +6,9 @@
 
 	<br><img class="districtpic" src="../static/DistrictPics/{{housedistrict.shortcode}}.png">
 	<p><b>In region:</b> {{housedistrict.region}}</p>
-	<p><br><b>Represented in 2014 by: </b><a href="{{ url_for('Rep', id = legislator.id)}}">{{ legislator.firstname}} {{legislator.lastname}} ({{legislator.party}})</a> </p>
+	<p><br><b>Represented in 2014 by: </b><a href="{% url 'RepresentativeView' %}">{{ legislator.firstname}} {{legislator.lastname}} ({{legislator.party}})</a> </p>
 
-	<p><br><b>Nested in:</b> <a href="{{ url_for('SD', shortcode = housedistrict.nestedInSD) }}">Senate District {{housedistrict.nestedInSD}}</a></p>
+	<p><br><b>Nested in:</b> <a href="{% url 'SDView' %}">Senate District {{housedistrict.nestedInSD.number}}</a></p>
 	<p><br><b>Counties:</b> {{housedistrict.counties}}</p>
 	<p><br><b>Major cities:</b> {{housedistrict.cities}}</p>
 	<p><br><b>In Senate District:</b> {{housedistrict.SD}}

@@ -6,12 +6,11 @@
 
 	<br><img class="districtpic" src="../static/DistrictPics/{{senatedistrict.shortcode}}.png">
 	<p><b>In region:</b> {{senatedistrict.region}}</p>
-	<p><br><b>Represented in 2014 by:</b><a href="{{ url_for('Sen', id = legislator.id)}}">{{ legislator.firstname}} {{legislator.lastname}} ({{legislator.party}})</a> </p>
+	<p><br><b>Represented in 2014 by:</b><a href="{% url 'SenatorView' %}">{{ legislator.firstname}} {{legislator.lastname}} ({{legislator.party}})</a> </p>
 
 	<p><br><b>Contains:</b>
-		<a href="{{ url_for('HD', shortcode = senatedistrict.nestsHDs[0].shortcode) }}">House District {{senatedistrict.nestsHDs[0].number}}</a>,
-		<a href="{{ url_for('HD', shortcode = senatedistrict.nestsHDs[1].shortcode) }}">House District {{senatedistrict.nestsHDs[1].shortcode}}</a>,
-		<a href="{{ url_for('HD', shortcode = senatedistrict.nestsHDs[2].shortcode) }}">House District {{senatedistrict.nestsHDs[2].shortcode}}</a></p>	
+		<a href="{% url 'HDView'%}">House District 81 {{senatedistrict.housedistricts.number}}</a>
+
 
 	<p><br><b>Counties:</b> {{senatedistrict.counties}}</p>
 	<p><br><b>Major cities:</b> {{senatedistrict.cities}}</p>
@@ -20,9 +19,3 @@
 </div>
 
  {% endblock%}
-
-
-
-
-
-<a href="{{ url_for('HD', shortcode = senatedistrict.nestsHDs[0].shortcode) }}">

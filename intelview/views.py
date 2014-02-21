@@ -40,20 +40,26 @@ def help(request):
 
 #Individual place pages
 def SDView(request):
-	return render(request, "SD.html")
+	senatedistrict = SenateDistrict.objects.get(number=1)
+	legislator = Senator.objects.get(lastname = "Hite")
+	return render(request, "SD.html", {'senatedistrict': senatedistrict, 'legislator': legislator })
 
 def HDView(request):
-	return render(request, "HD.html")
+	housedistrict = HouseDistrict.objects.get(number=81)
+	legislator = Representative.objects.get(lastname = "Wachtmann")
+	return render(request, "HD.html", {'housedistrict': housedistrict, 'legislator': legislator })
 
 def regionView(request):
-	return render(request, "region.html")
+	region = Region.objects.get(name="Northwest")
+	return render(request, "region.html", {'region':region})
 
 def countyView(request):
 	county = County.objects.get(name="Adams")
 	return render(request, "county.html", {'county': county})
 
 def cityView(request):
-	return render(request, "city.html")
+	city = City.objects.get(name = "Ada")
+	return render(request, "city.html", {'city': city })
 
 def SenatorView(request):
 	return render(request, "Senator.html")
