@@ -77,7 +77,8 @@ def HDView(request, HD_id):
 @login_required
 def regionView(request, region_id):
 	region = get_object_or_404(Region, pk=region_id)
-	return render(request, "region.html", {'region':region})
+	counties = County.objects.filter(region = region)
+	return render(request, "region.html", {'region':region, 'counties':counties})
 
 @login_required
 def countyView(request, county_id):

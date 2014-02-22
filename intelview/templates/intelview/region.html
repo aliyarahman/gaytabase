@@ -4,11 +4,12 @@
 <div class="contentholder">
 	<h1 class="formheader">{{region.name}} Ohio</h2>
 	<p><br><b>Counties:</b>
-	{% for county in region.counties %}
-		<p>{{county.name}}</p>
+	<ul>
+	{% for county in counties %}
+		<li><a href="{% url 'countyView' county.id %}">{{county.name}}</a></li>
 	{% endfor %}
-	
+	</ul>
 	
 </div>
 
- {% endblock%}
+{% endblock%}
