@@ -8,28 +8,28 @@
 
 		<p><br><br><b>Regions</b></p>
 				{% for region in regions %}
-					<a href="{% url 'regionView' region.id %}">{{region.name}}</a> - 
+					<a href="{% url 'regionView' region.id %}">{{region.name}}</a>{% if region.name != "Central"%} -{% endif %}
 				{% endfor %}
 
 		<p><br><br><b>Senate Districts</b></p>
 				{% for senatedistrict in senatedistricts %}
-					<a href="{% url 'SDView' senatedistrict.id %}">{{senatedistrict.shortcode}}</a> - 
+					<a href="{% url 'SDView' senatedistrict.id %}">{{senatedistrict.shortcode}}</a>{% if senatedistrict.number != 33%}-{% endif %}
 				{% endfor %}
 
 		<p><br><br><b>House Districts</b></p>
 				{% for housedistrict in housedistricts %}
-					<a href="{% url 'HDView' housedistrict.id %}">{{housedistrict.shortcode}}</a> - 
+					<a href="{% url 'HDView' housedistrict.id %}">{{housedistrict.shortcode}}</a>{% if housedistrict.number != 99%} -{% endif %} 
 				{% endfor %}
 
 
 		<p><br><br><b>Counties</b></p>
 				{% for county in counties %}
-					<a href="{% url 'countyView' county.id %}">{{county.name}}</a> - 
+					<a href="{% url 'countyView' county.id %}">{{county.name}}</a>{% if county.name != "Wyandot"%} -{% endif %}
 				{% endfor %}
 
 		<p><br><br><b>Cities</b></p>
 				{% for city in cities %}
-					<a href="{% url 'cityView' city.id %}">{{city.name}}</a> - 
+					<a href="{% url 'cityView' city.id %}">{{city.name}}</a>{% if city.name != "Zanesville "%} -{% endif %} 
 				{% endfor %}
 		</div>
 

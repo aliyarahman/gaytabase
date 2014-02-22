@@ -67,7 +67,8 @@ def help(request):
 @login_required
 def SDView(request, SD_id):
 	senatedistrict = get_object_or_404(SenateDistrict, pk=SD_id)
-	return render(request, "SD.html", {'senatedistrict': senatedistrict })
+	housedistricts = HouseDistrict.objects.filter(nestedInSD = senatedistrict)
+	return render(request, "SD.html", {'senatedistrict': senatedistrict, 'housedistricts':housedistricts })
 
 @login_required
 def HDView(request, HD_id):

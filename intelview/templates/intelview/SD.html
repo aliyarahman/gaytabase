@@ -5,19 +5,18 @@
 <div class="contentholder">
 	<h1 class="formheader">Senate District {{senatedistrict.number}}</h2>
 
-	<br><img class="districtpic" src="{% static 'intelview/DistrictPics/'%}SD{{senatedistrict.number}}.png">
-	<p><b>In region:</b><a href="{% url 'regionView' senatedistrict.region.id %}">{{senatedistrict.region.name}}</a></p>
+	<img class="districtpic" src="{% static 'intelview/DistrictPics/'%}SD{{senatedistrict.number}}.png">
+	<br><p><b>In region</b>: <a href="{% url 'regionView' senatedistrict.region.id %}">{{senatedistrict.region.name}}</a></p>
 	<p><br><b>Represented in 2014 by:</b></p>
 
-	<p><br><b>Contains:</b>
-		{% for h in senatedistrict.housedistricts %}
+	<p><br><b>Nests:</b>
+		{% for h in housedistricts %}
 		<a href="{% url 'HDView' h.id %}">House District {{h.number}}</a>
 		{% endfor %}
 
 
 	<p><br><b>Counties:</b> {{senatedistrict.counties}}</p>
 	<p><br><b>Major cities:</b> {{senatedistrict.cities}}</p>
-	<p><br><b>Countains House Districts:</b> {{senatedistrict.HDs}}
 
 </div>
 

@@ -3,18 +3,15 @@
 {% load static %}
 
 <div class="contentholder">
-	<h2 class="formheader">House District {{housedistrict.number}}</h2>
+	<h1 class="formheader">House District {{housedistrict.number}}</h1>
 
-	<br><img class="districtpic" src="{% static 'intelview/DistrictPics/'%}HD{{housedistrict.number}}.png">
-	<p><b>In region:</b><a href="{% url 'regionView' housedistrict.region.id %}">{{housedistrict.region.name}}</a></p>
-	<p><br><b>Represented in 2014 by: </p>
+	<img class="districtpic" src="{% static 'intelview/DistrictPics/'%}HD{{housedistrict.number}}.png">
+	<br><p><b>In region</b>: <a href="{% url 'regionView' housedistrict.region.id %}">{{housedistrict.region.name}}</a></p>
+	<p><br><b>Represented in 2014 by</b>: </p>
 
 	<p><br><b>Nested in:</b> <a href="{% url 'SDView' housedistrict.nestedInSD.id %}">Senate District {{housedistrict.nestedInSD.number}}</a></p>
 	<p><br><b>Counties:</b> {{housedistrict.counties}}</p>
 	<p><br><b>Major cities:</b> {{housedistrict.cities}}</p>
-	<p><br><b>In Senate District:</b> {{housedistrict.SD}}
-	<p><br><b>Other HDs in same Senate District:</b> {{housedistrict.inSDs}}
-
 
 
 

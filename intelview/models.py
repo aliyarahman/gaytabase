@@ -42,8 +42,8 @@ class SenateDistrict(models.Model):
 	number = models.IntegerField()
 	shortcode = models.CharField(max_length=4)
 	region = models.ForeignKey(Region)
-	DPI = models.CharField(max_length=7, default = 0)
-	cities = models.ManyToManyField(City)
+	DPI = models.CharField(max_length=7, default = [])
+	cities = models.ManyToManyField(City, default = [])
 	counties = models.ManyToManyField(County, default = [])
 	
 	def __unicode__(self):
@@ -55,13 +55,12 @@ class HouseDistrict(models.Model):
 	shortcode = models.CharField(max_length=4)
 	region = models.ForeignKey(Region)
 	nestedInSD = models.ForeignKey(SenateDistrict)
-	DPI = models.CharField(max_length=7)
-	cities = models.ManyToManyField(City)
+	DPI = models.CharField(max_length=7, default = [])
+	cities = models.ManyToManyField(City, default =[])
 	counties = models.ManyToManyField(County, default = [])
 
 	def __unicode__(self):
 		return self.shortcode
-
 
 
 class Senator(models.Model):

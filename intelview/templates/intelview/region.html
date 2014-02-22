@@ -3,33 +3,45 @@
 
 <div class="contentholder">
 	<h1 class="formheader">{{region.name}} Ohio</h2>
-	<p><br><b>Counties:</b>
-	<ul>
-	{% for county in counties %}
-		<li><a href="{% url 'countyView' county.id %}">{{county.name}}</a></li>
-	{% endfor %}
-	</ul>
+
+	<div class="regionsection">
+		<div class="regionsubsection">
+		<p><b>Senate Districts:</b>
+			<ul>
+			{% for sd in senatedistricts %}
+				<li><a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		
+		<div class="regionsubsection">
+		<p><b>House Districts:</b>
+			<ul>
+			{% for hd in housedistricts %}
+				<li><a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		
+		<div class="regionsubsection">
+			<p><b>Counties:</b>
+			<ul>
+			{% for county in counties %}
+				<li><a href="{% url 'countyView' county.id %}">{{county.name}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		
+		<div class="regionsubsection">
+			<p><b>Cities:</b>
+			<ul>
+			{% for city in cities %}
+				<li><a href="{% url 'cityView' city.id %}">{{city.name}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
 	
-	<p><br><b>Cities:</b>
-	<ul>
-	{% for city in cities %}
-		<li><a href="{% url 'cityView' city.id %}">{{city.name}}</a></li>
-	{% endfor %}
-	</ul>
-	
-	<br><br><p><b>Senate Districts:</b>
-	<ul>
-	{% for sd in senatedistricts %}
-		<li><a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a></li>
-	{% endfor %}
-	</ul>
-	
-	<br><br><p><b>House Districts:</b>
-	<ul>
-	{% for hd in housedistricts %}
-		<li><a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a></li>
-	{% endfor %}
-	</ul>
 	
 </div>
 

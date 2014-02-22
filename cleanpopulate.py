@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 #Note this script must be run after running on the database:
-#(i) SQL command to drop the database
-#{ii} SQL to create database
+#(i) Drop database SQL
+#(ii) Create database SQL
 #(iii) python manage.py syncdb
 
-#Note that syncdb ONLY adds new tables. Does not modify existing tables.
+#Note that syncdb ONLY adds new tables. Does not modify existing tables. SQLclear command isn't doing it either.
 
 import os
 from intelview.models import Region, County, City, Senator, Representative, HouseDistrict, SenateDistrict, Business, Leader
@@ -103,3 +103,46 @@ for row in reader:
 	c.county = County.objects.get(name=countyname1)
 	c.region = c.county.region
 	c.save()
+
+#Add SDs
+NEsds = [13,18,21,22,23,24,25,27,28,29,32,33]
+NWsds = [1,2,11,12,14,26]
+SEsds = [30,20]
+SWsds = [4,5,6,7,8,9,10]
+CENTsds = [3,15,16,17,19,31]
+ifile = open('SD_data.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	if int(row[0])<10:
+		sdshortcode = "SD0"+row[0]
+	else:
+		sdshortcode = "SD"+row[0]
+	if int(row[0]) in NWsds:
+		sdregion = Region.objects.get(shortcode="NW")
+	elif int(row[0]) in NEsds:
+		sdregion = Region.objects.get(shortcode="NE")
+	elif int(row[0]) in SWsds:
+		sdregion = Region.objects.get(shortcode="SW")
+	elif int(row[0]) in SEsds:
+		sdregion = Region.objects.get(shortcode="SE")
+	else:
+		sdregion = Region.objects.get(shortcode="CENT")
+	sd = SenateDistrict(number = row[0], shortcode = sdshortcode, region = sdregion)	
+	sd.save()
+
+
+
+#Add HDs
+ifile = open('HD_data.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	if int(row[0])<10:
+		hdshortcode = "HD0"+row[0]
+	else:
+		hdshortcode = "HD"+row[0]
+	sdnumber = int(row[1])
+	sd = SenateDistrict.objects.get(number=sdnumber)
+	hdregion = sd.region
+	hd = HouseDistrict(number = row[0], shortcode = hdshortcode, region = hdregion)
+	hd.nestedInSD = sd
+	hd.save()
