@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 
 <div class="contentholder">
 	<h1 class="formheader">Senate District {{senatedistrict.number}}</h2>
 
-	<br><img class="districtpic" src="../static/DistrictPics/{{senatedistrict.shortcode}}.png">
+	<br><img class="districtpic" src="{% static 'intelview/DistrictPics/'%}SD{{senatedistrict.number}}.png">
 	<p><b>In region:</b> {{senatedistrict.region}}</p>
 	<p><br><b>Represented in 2014 by:</b></p>
 
