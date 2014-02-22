@@ -78,7 +78,9 @@ def HDView(request, HD_id):
 def regionView(request, region_id):
 	region = get_object_or_404(Region, pk=region_id)
 	counties = County.objects.filter(region = region)
-	return render(request, "region.html", {'region':region, 'counties':counties})
+	senatedistricts = SenateDistrict.objects.filter(region = region)
+	housedistricts = HouseDistrict.objects.filter(region = region)
+	return render(request, "region.html", {'region':region, 'counties':counties, 'senatedistricts':senatedistricts, 'housedistricts':housedistricts})
 
 @login_required
 def countyView(request, county_id):

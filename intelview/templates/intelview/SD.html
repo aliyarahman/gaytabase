@@ -6,7 +6,7 @@
 	<h1 class="formheader">Senate District {{senatedistrict.number}}</h2>
 
 	<br><img class="districtpic" src="{% static 'intelview/DistrictPics/'%}SD{{senatedistrict.number}}.png">
-	<p><b>In region:</b> {{senatedistrict.region}}</p>
+	<p><b>In region:</b><a href="{% url 'regionView' senatedistrict.region.id %}">{{senatedistrict.region.name}}</a></p>
 	<p><br><b>Represented in 2014 by:</b></p>
 
 	<p><br><b>Contains:</b>

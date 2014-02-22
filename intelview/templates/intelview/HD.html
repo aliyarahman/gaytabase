@@ -6,7 +6,7 @@
 	<h2 class="formheader">House District {{housedistrict.number}}</h2>
 
 	<br><img class="districtpic" src="{% static 'intelview/DistrictPics/'%}HD{{housedistrict.number}}.png">
-	<p><b>In region:</b> {{housedistrict.region}}</p>
+	<p><b>In region:</b><a href="{% url 'regionView' housedistrict.region.id %}">{{housedistrict.region.name}}</a></p>
 	<p><br><b>Represented in 2014 by: </p>
 
 	<p><br><b>Nested in:</b> <a href="{% url 'SDView' housedistrict.nestedInSD.id %}">Senate District {{housedistrict.nestedInSD.number}}</a></p>

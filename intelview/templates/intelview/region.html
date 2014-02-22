@@ -10,6 +10,21 @@
 	{% endfor %}
 	</ul>
 	
+	
+	<br><br><p><b>Senate Districts:</b>
+	<ul>
+	{% for sd in senatedistricts %}
+		<li><a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a></li>
+	{% endfor %}
+	</ul>
+	
+	<br><br><p><b>House Districts:</b>
+	<ul>
+	{% for hd in housedistricts %}
+		<li><a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a></li>
+	{% endfor %}
+	</ul>
+	
 </div>
 
 {% endblock%}
