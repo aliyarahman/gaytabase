@@ -13,6 +13,7 @@ class Region(models.Model):
 	name = models.CharField(max_length=15, unique = True)
 	shortcode = models.CharField(max_length=4)
 	otherNotes = models.CharField(max_length=400, default = "")
+
 	def __unicode__(self):
 		return self.name
 
@@ -20,13 +21,10 @@ class Region(models.Model):
 class County(models.Model):
 	name = models.CharField(max_length=30, unique = True)
 	region = models.ForeignKey(Region)
-#	population = models.IntegerField(max_length=7, default=0)
 	otherNotes = models.CharField(max_length=400, default = "")
-	localLegislation = models.CharField(max_length=400, default = "N/A")
-
+	
 	def __unicode__(self):
 		return self.name
-
 
 
 class City(models.Model):

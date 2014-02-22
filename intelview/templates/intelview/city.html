@@ -4,8 +4,10 @@
 <div class="contentholder">
 
 	<h1 class="formheader">{{city.name}} (city)</h2>
-	
-	<p><br><br><b>In Counties:</b> {{city.counties}}</p>
+
+
+	<p><br><br><b>Region</b>: <a href="{% url 'regionView' city.region.id %}">{{city.region.name}}</a></p>
+	<p><br><b>In Counties:</b> {{city.county}}</p>
 	<p><br><b>Population:</b> {{city.population}}
 
 </div>

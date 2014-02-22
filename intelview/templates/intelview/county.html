@@ -5,6 +5,7 @@
 	<h1 class="formheader">{{county.name}} County</h2>
 	{% load staticfiles %}
 	<br><img class="districtpic" src="{% static 'intelview/CountyPics/'%}{{lowername}}.gif">
+
 	<p><br><br><b>Region</b>: <a href="{% url 'regionView' county.region.id %}">{{county.region.name}}</a></p>
 	<p><br><b>Major cities:</b> {{county.cities}}</p>
 	<p><br><b>Senate District(s):</b> {{county.HDs}}

@@ -10,6 +10,12 @@
 	{% endfor %}
 	</ul>
 	
+	<p><br><b>Cities:</b>
+	<ul>
+	{% for city in cities %}
+		<li><a href="{% url 'cityView' city.id %}">{{city.name}}</a></li>
+	{% endfor %}
+	</ul>
 	
 	<br><br><p><b>Senate Districts:</b>
 	<ul>
