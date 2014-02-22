@@ -6,10 +6,12 @@
 
 	<br><img class="districtpic" src="../static/DistrictPics/{{senatedistrict.shortcode}}.png">
 	<p><b>In region:</b> {{senatedistrict.region}}</p>
-	<p><br><b>Represented in 2014 by:</b><a href="{% url 'SenatorView' %}">{{ legislator.firstname}} {{legislator.lastname}} ({{legislator.party}})</a> </p>
+	<p><br><b>Represented in 2014 by:</b></p>
 
 	<p><br><b>Contains:</b>
-		<a href="{% url 'HDView'%}">House District 81 {{senatedistrict.housedistricts.number}}</a>
+		{% for h in senatedistrict.housedistricts %}
+		<a href="{% url 'HDView' h.id %}">House District {{h.number}}</a>
+		{% endfor %}
 
 
 	<p><br><b>Counties:</b> {{senatedistrict.counties}}</p>

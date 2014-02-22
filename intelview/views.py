@@ -1,6 +1,6 @@
 # Import resources
 import urlparse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -17,7 +17,7 @@ def login(request):
 	if user is not None:
 		if user.is_active:
 			login(request, user)
-		
+
 #Logout page
 def logout(request):
 	logout(request)
@@ -65,48 +65,52 @@ def help(request):
 
 #Individual place pages
 @login_required
-def SDView(request):
-	senatedistrict = SenateDistrict.objects.get(number=1)
-	legislator = Senator.objects.get(lastname = "Hite")
-	return render(request, "SD.html", {'senatedistrict': senatedistrict, 'legislator': legislator })
+def SDView(request, SD_id):
+	senatedistrict = get_object_or_404(SenateDistrict, pk=SD_id)
+	return render(request, "SD.html", {'senatedistrict': senatedistrict })
 
 @login_required
-def HDView(request):
-	housedistrict = HouseDistrict.objects.get(number=81)
-	legislator = Representative.objects.get(lastname = "Wachtmann")
-	return render(request, "HD.html", {'housedistrict': housedistrict, 'legislator': legislator })
+def HDView(request, HD_id):
+	housedistrict = get_object_or_404(HouseDistrict, pk=HD_id)
+	return render(request, "HD.html", {'housedistrict': housedistrict })
 
 @login_required
-def regionView(request):
-	region = Region.objects.get(name="Northwest")
+def regionView(request, region_id):
+	region = get_object_or_404(Region, pk=region_id)
 	return render(request, "region.html", {'region':region})
 
 @login_required
-def countyView(request):
-	county = County.objects.get(name="Adams")
-	return render(request, "county.html", {'county': county})
+def countyView(request, county_id):
+	county = get_object_or_404(County, pk=county_id)
+	lowername = county.name.lower().replace(" ","")
+	return render(request, "county.html", {'county': county, 'lowername':lowername})
 
 @login_required
-def cityView(request):
-	city = City.objects.get(name = "Ada")
+def cityView(request, city_id):
+	city = get_object_or_404(City, pk=city_id)
 	return render(request, "city.html", {'city': city })
 
 @login_required
-def SenatorView(request):
-	return render(request, "Senator.html")
+def SenatorView(request, Senator_id):
+	senator = get_object_or_404(Senator, pk=Senator_id)
+	return render(request, "Senator.html", {'senator': senator })
 	
 @login_required
-def RepresentativeView(request):
-	return render(request, "Representative.html")
+def RepresentativeView(request, Representative_id):
+	representative = get_object_or_404(Representative, pk=Representative_id)
+	return render(request, "Representative.html", {'representative': representative })
 
 @login_required
-def businessView(request):
-	return render(request, "business.html")
+def businessView(request, business_id):
+	business = get_object_or_404(Business, pk=business_id)	
+	return render(request, "business.html", {'business': business })
 
 @login_required
-def organizationView(request):
-	return render(request, "organization.html")
+def organizationView(request, organization_id):
+	organization = get_object_or_404(Organization, pk=organization_id)
+	return render(request, "organization.html" , {'organization': organization })
 
 @login_required
-def leaderView(request):
-	return render(request, "leader.html")
+def leaderView(request, leader_id):
+	leader = get_object_or_404(Leader, pk=leader_id)
+	return render(request, "leader.html", {'leader': leader })

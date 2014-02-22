@@ -1,26 +1,17 @@
-<html>
-	<head><title>ProMedica</title></head>
-	<body>
-	<p>
-	<img src="{{ url_for('static', filename='ProMedica.png')}}" style="float: left;">
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="contentholder">
+	<h1 class="formheader">{{business.name}}</h2>
+	<img class="districtpic" src="{% static 'intelview/BusinessPics/'%}{{business.name}}.png">
+	<p><br><br><br><br><b>Region:</b> {{business.region}}</p>
+	<p><br><b>Has offices in cities:</b>{{business.cities}}</p>
+	<p><br><b>Senate District(s):</b>
+	<p><br><b>House District(s):</b></p>
+	<p><br><b>Has donated to:</b> 
 	
-	<p></p><h1 style="clear: both;"><br><br>ProMedica</h1>
-	<p><i>Major offices in:</i><a href="{{ url_for('SD01') }}" style="text-decoration: none">Senate District 1</a> (<a href="{{ url_for('Hite') }}" style="text-decoration: none"> Cliff Hite(R)</a>)
-	<p><i>Has SO in company nondiscrimination policy:</i> Yes 
-	<p><i>Has GI or GE in company nondiscrimination policy:</i> No
-	<p><i>Has domestic partner benefits for LGBT families:</i> Yes
-	<p><br>
 	
-	<h3>Donor info</h3>
-	<br><i>Contributed to campaigns of:</i>None 
-	<br><br><i>Legislator is target for EHEA 2013/2014 campaign?:</i> No
-	<br><br>
-	
-	<h3>EO leaders living near major office district</h3>
-	<br><i>Community leaders ("yes" indicates Lobby Day 2013 attendance):</i> Lee Gibson - Yes
-Padraic Stanley - Yes KD Miller - Yes
-	<br><br><i>Faith leaders:</i> 
-	<br><br>
-	
-	</body>
-	</html>
+</div>
+
+{% endblock%}

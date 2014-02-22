@@ -1,26 +1,26 @@
-<html>
-	<head><title>ProMedica</title></head>
-	<body>
-	<p>
-	<img src="{{ url_for('static', filename='ProMedica.png')}}" style="float: left;">
+{% extends "base.html" %}
+{% block content %}
+
+<div class="contentholder">
+
+	<div class = "formheader">
+		<h2>{{organization.name}}</h2>
+	</div>
 	
-	<p></p><h1 style="clear: both;"><br><br>ProMedica</h1>
-	<p><i>Major offices in:</i><a href="{{ url_for('SD01') }}" style="text-decoration: none">Senate District 1</a> (<a href="{{ url_for('Hite') }}" style="text-decoration: none"> Cliff Hite(R)</a>)
-	<p><i>Has SO in company nondiscrimination policy:</i> Yes 
-	<p><i>Has GI or GE in company nondiscrimination policy:</i> No
-	<p><i>Has domestic partner benefits for LGBT families:</i> Yes
-	<p><br>
+	<div>
+	{% if organization.ally == 1 %}
+		<li>Progressive ally organization</b>
+	{% endif %}
+	{% if organization.affinitygroup == 1 %}
+		<li>Equality Ohio affinity group</b>
+	{% endif %}
+	</div>
 	
-	<h3>Donor info</h3>
-	<br><i>Contributed to campaigns of:</i>None 
-	<br><br><i>Legislator is target for EHEA 2013/2014 campaign?:</i> No
 	<br><br>
+	<p><b>Region</b>: {{organization.region}}</p>
+	<p><b>Located in counties</b>: {{organization.county}}</p>
+	<p><b>Located in cities</b>: {{organization.city}}</p>
 	
-	<h3>EO leaders living near major office district</h3>
-	<br><i>Community leaders ("yes" indicates Lobby Day 2013 attendance):</i> Lee Gibson - Yes
-Padraic Stanley - Yes KD Miller - Yes
-	<br><br><i>Faith leaders:</i> 
-	<br><br>
-	
-	</body>
-	</html>
+
+</div>
+{% endblock%}

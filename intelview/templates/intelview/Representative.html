@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 	<p>
-	<img class = "legpic" src="../static/HousePics/{{representative.lastname}}Rep{{representative.party}}.jpg">
+	<img class = "legpic" src="{% static 'intelview/HousePics/'%}{{representative.lastname}}Rep{{representative.party}}.jpg">
 	<table>
 	<h1>{{representative.firstname}} {{representative.lastname}} ({{representative.party}})</h1>
-	<h3>Represents: <a href="{{ url_for('HD', shortcode = representative.district.shortcode) }}">House District {{representative.district.number}}</a></h3>
+	<h3>Represents: <a href="{% url 'HDView' representative.district.id %}">House District {{representative.district.number}}</a></h3>
 	<tr><td><b>Role in House</b>: {{representative.title}}
 	<tr><td><b>Region of Ohio</b>: 
 	<tr><td><b>Committees in 130th General Assembly</b>: {{representative.committees2014}}

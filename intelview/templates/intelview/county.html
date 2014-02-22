@@ -4,7 +4,7 @@
 <div class="contentholder">
 	<h1 class="formheader">{{county.name}} County</h2>
 	{% load staticfiles %}
-	<br><img class="districtpic" src="{% static 'intelview/CountyPics/vanwert.gif' %}">
+	<br><img class="districtpic" src="{% static 'intelview/CountyPics/'%}{{lowername}}.gif">
 	<p><br><br><b>Region:</b> {{county.region}}</p>
 	<p><br><b>Major cities:</b> {{county.cities}}</p>
 	<p><br><b>Senate District(s):</b> {{county.HDs}}

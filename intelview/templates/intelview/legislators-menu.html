@@ -7,12 +7,12 @@
 
 		<p><br><br><b>Senators</b></p>
 				{% for Senator in Senators %}
-					<a href="{% url 'SenatorView' %}">{{Senator.lastname}}</a> - 
+					<a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}}</a> - 
 				{% endfor %}
 
 		<p><br><br><b>House Representatives</b></p>
 				{% for Representative in Representatives %}
-					<a href="{% url 'RepresentativeView' %}">{{Representative.lastname}}</a> - 
+					<a href="{% url 'RepresentativeView' Representative.id %}">{{Representative.lastname}}</a> - 
 				{% endfor %}
 
 		</div>

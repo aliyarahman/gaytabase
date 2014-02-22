@@ -8,21 +8,21 @@
 		<p><br><br><b>Affinity groups</b></p>
 				{% for organization in organizations %}
 					{% if organization.name == "SHADES" %}
-						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}
 
 		<p><br><br><b>Nonprofits</b></p>
 				{% for organization in organizations %}
 					{% if organization.name == "PFLAG" or organization.name = "Citizens for Community Values" %}
-						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}
 
 		<p><br><br><b>Progressive allies</b></p>
 				{% for organization in organizations %}
 					{% if organization.ally == 1 %}
-						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}
 				
@@ -30,7 +30,7 @@
 		<p><br><br><b>Conservatives</b></p>
 				{% for organization in organizations %}
 					{% if organization.name == "Citizens for Community Values" %}
-						<a href="{% url 'organizationView' %}">{{organization.name}}</a> - 
+						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}				
 		</div>

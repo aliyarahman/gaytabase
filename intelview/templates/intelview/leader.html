@@ -1,33 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-	<p>
-	<img src="{{ url_for('static', filename='HiteSenR.jpg')}}">
-	<table>
-	<h1>Senator Cliff Hite(R)</h1>
-	<h3>Represents <a href="{{ url_for('SD01') }}">Senate District 1</a></h3>
-	<tr><td><b>Region of Ohio</b>: Northwest
-	<tr><td><b>Committees in 130th General Assembly</b>: Ag (C), Ed (VC), E&NR, I&FI, PU, W&M
-	<tr><td><b>Target for EHEA in 130th: </b>No</td></tr>
-	<tr><td><b>EHEA support in 130th Gen. Assembly: </b>Yes</td></tr>
-	<tr><td><b>EHEA co-sponsor in 130th Gen. Assembly: </b>No</td></tr>
-	<tr><td><b>EHEA vote in 2009:</b> Yes</td></tr>
-	<tr><td><b>Profession</b>: </td></tr>
-	<tr><td><b>Faith affiliation</b>: Methodist</td></tr>
-	</table>
-	<br><br>
-	<h3>Donors</h3>
-	In 2012 (SD 1 race): <a>Wholesale Beer & Wine Association of Ohio ($9,000)</a>; Ohio Association of Realtors ($8,000);
-<a>FirstEnergy Corp ($7,500)</a>; <a>American Electric Power ($7,500)</a>; Chesapeake Energy ($5,750)
-In 2010 (HD 76 race): <a>FirstEnergy Corp ($3,000)</a>; ORP ($7,237); George Whitson ($3,100);
-Michael Peak ($3,000); Auglaize County Republican Party ($5,000)
-	<br><br><h3>JobsOhio Companies with offices in district</h3>
-	ProMedica
-	<br><br>
-	<h3>Lobby Day 2013 notes</h3>
-	<i>EO leaders attending:</i> KD Miller           
-	<p><i>Did legislator attend in person?:</i> Yes
-	<p><i>Legislative staff attending:</i> NA 
-	<p><i>Commitments made by legislator's office:</i> Will vote yes. Will not co-sponsor. Will talk to Republican colleagues who are on the fence.
-	<p><i>Commitments made by EO delegation:</i> Keep pestering him 
-	<p><i>Other comments:</i>  PJ Bradford, her legislative aide, is very supportive. He revealed that he was a gay Republican[? in our meeting.
- {% endblock%}
+<div class="contentholder">
+	<div class = "formheader">
+		<h2>{{leader.tite}} {{leader.firstname}} {{leader.lastname}}</h2>
+	</div>
+	
+	<p>Region: {{leader.region}}</p>
+	<p>Lives in county: {{leader.county}}</p>
+	<p>Lives in city: {{leader.city}}</p>
+	
+</div>
+{% endblock%}
