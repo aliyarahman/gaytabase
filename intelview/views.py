@@ -39,8 +39,8 @@ def places(request):
 
 @login_required
 def legislators(request):
-	Senators = Senator.objects.all()
-	Representatives = Representative.objects.all()
+	Senators = Senator.objects.order_by('lastname').all()
+	Representatives = Representative.objects.order_by('lastname').all()
 	return render(request, "legislators-menu.html", {'Senators': Senators, 'Representatives':Representatives})
 
 @login_required

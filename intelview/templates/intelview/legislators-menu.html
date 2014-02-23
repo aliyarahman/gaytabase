@@ -26,16 +26,16 @@
 
 
 		<div id="greenbackground" class="districtinfo">
-			<p><b>Senators</b></p>
+			<p><b>All Senators</b></p>
 				{% for Senator in Senators %}
-					{% if Senator.EHEAtarget == 1 %}<span class="target">{% endif %}<a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}}</a> {% if Senator.EHEAtarget == 1 %}</span>{% endif %} -
+					{% if Senator.EHEAtarget == 1 %}<span class="target">{% endif %}<a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}}</a> {% if Senator.EHEAtarget == 1 %}</span>{% endif %} {% if Senator.lastname != "Widener" %} -{% endif %}
 				{% endfor %}
 		</div>
 
 		<div id="greenbackground" class="districtinfo">
-			<p><b>House Representatives</b></p>
+			<p><b>All House Representatives</b></p>
 				{% for Representative in Representatives %}
-					{% if Representative.EHEAtarget == 1 %}<span class="target">{% endif %}<a href="{% url 'RepresentativeView' Representative.id %}" >{{Representative.lastname}}</a>{% if Representative.EHEAtarget == 1 %}</span>{% endif %} -
+					{% if Representative.EHEAtarget == 1 %}<span class="target">{% endif %}<a href="{% url 'RepresentativeView' Representative.id %}" >{{Representative.lastname}}</a>{% if Representative.EHEAtarget == 1 %}</span>{% endif %} {% if Representative.lastname != "Young" %} -{% endif %}
 				{% endfor %}
 		</div>
 

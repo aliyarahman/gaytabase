@@ -13,12 +13,12 @@
 
 		<div id="purplebackground"><b>Senate Districts</b><p>
 				{% for senatedistrict in senatedistricts %}
-					<a href="{% url 'SDView' senatedistrict.id %}">{{senatedistrict.shortcode}}</a>{% if senatedistrict.number != 33%}-{% endif %}
+					<a href="{% url 'SDView' senatedistrict.id %}">SD{{senatedistrict.number}}</a>{% if senatedistrict.number != 33%} -{% endif %}
 				{% endfor %}</p></div>
 
 		<div id="purplebackground"><b>House Districts</b><p>
 				{% for housedistrict in housedistricts %}
-					<a href="{% url 'HDView' housedistrict.id %}">{{housedistrict.shortcode}}</a>{% if housedistrict.number != 99%} -{% endif %} 
+					<a href="{% url 'HDView' housedistrict.id %}">HD{{housedistrict.number}}</a>{% if housedistrict.number != 99%} -{% endif %} 
 				{% endfor %}</p></div>
 
 
