@@ -12,7 +12,7 @@ from intelview.models import Region, County, City, Senator, Representative, Hous
 from django.contrib.auth.models import User
 import csv
 
-
+'''
 #Add an admin user, two staff users, and a volunteer user
 aliya = User.objects.create_user("aliya@equalityohio.org", "aliya@equalityohio.org", "P@ssw0rd123")
 aliya.first_name = "Aliya"
@@ -210,10 +210,7 @@ reader = csv.reader(ifile)
 for row in reader:
 	otherNotes = " "
 	region = Region.objects.get(shortcode =row[4])
-	try:
-		city = City.objects.get(name = row[6])
-	except:
-		print row[6]
+	city = City.objects.get(name = row[6])
 	county = city.county
 	if row[7]:
 		zip = row[7]
@@ -230,6 +227,28 @@ for row in reader:
 	if row[14]:
 		otherNotes=otherNotes+("\nWas referred to Cheri Holdridge by "+row[14])
 	if row[15]:
-		otherNotes=otherNotes+("\nWas referred to Cheri Holdridge by "+row[15])
+		otherNotes=otherNotes+row[15]
 	r = Leader(lastname = row[0], firstname = row[1], organizations = row[2], denomination = row[3], region=region, address = row[5], city = city, county = county, zip = row[7], title = row[8], email = row[9], phone = row[10], signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =1, volunteerleader =0, businessleader =0)
 	r.save()
+'''
+
+#Add volunteer leaders
+ifile = open('supervols.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	otherNotes = " "
+	region = Region.objects.get(shortcode =row[4])
+	city = City.objects.get(name = row[6])
+	county = city.county
+	if row[7]:
+		zip = row[7]
+	else:
+		zip = ""
+	if row[11]=='yes':
+		signedENDA = 1
+	else:
+		signedENDA = 0
+	if row[15]:
+		otherNotes=otherNotes+row[15]
+	v = Leader(lastname = row[0], firstname = row[1], organizations = row[2], denomination = row[3], region=region, address = row[5], city = city, county = county, zip = row[7], title = row[8], email = row[9], phone = row[10], signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =0, volunteerleader =1, businessleader =0)
+	v.save()

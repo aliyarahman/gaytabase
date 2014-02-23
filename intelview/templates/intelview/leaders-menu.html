@@ -6,22 +6,85 @@
 		<div class="menupage">
 
 		<p><br><br><b>Volunteer leaders</b></p>
-				{% for leader in leaders %}
-					{% if leader.volunteerleader == 1 %}
-						<a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}}</a> - 
+			<div id="bluebackground">
+				<p><i>Northwest</i>:
+				<ul>{% for leader in leaders %}
+					{% if leader.volunteerleader == 1 and leader.region.shortcode == 'NW' %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} - {{leader.city}}{% if leader.organizations %}, {{leader.organizations}}{% endif %}</a></li> 
 					{% endif %}
-				{% endfor %}
+				{% endfor %}</ul>	
+			</div>
+			
+			<div id="bluebackground">
+				<p><i>Northeast</i>:
+				<ul>{% for leader in leaders %}
+					{% if leader.volunteerleader == 1 and leader.region.shortcode == 'NE' %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} - {{leader.city}}{% if leader.organizations %}, {{leader.organizations}}{% endif %}</a></li> 
+					{% endif %}
+				{% endfor %}</ul>
+			</div>
+			
+			<div id="bluebackground">				
+
+				<p><i>Southwest</i>:
+				<ul>{% for leader in leaders %}
+					{% if leader.volunteerleader == 1 and leader.region.shortcode == 'SW' %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} - {{leader.city}}{% if leader.organizations %}, {{leader.organizations}}{% endif %}</a></li> 
+					{% endif %}
+				{% endfor %}</ul>
+			</div>
+			
+			<div id="bluebackground">
+
+				<p><i>Southeast</i>:
+				<ul>{% for leader in leaders %}
+					{% if leader.volunteerleader == 1 and leader.region.shortcode == 'SE' %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} - {{leader.city}}{% if leader.organizations %}, {{leader.organizations}}{% endif %}</a></li> 
+					{% endif %}
+				{% endfor %}</ul>
+			</div>
+			
+			<div id="bluebackground">				
+				<p><i>Central</i>:
+				<ul>{% for leader in leaders %}
+					{% if leader.volunteerleader == 1 and leader.region.shortcode == 'CENT' %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} - {{leader.city}}{% if leader.organizations %}, {{leader.organizations}}{% endif %}</a></li> 
+					{% endif %}
+				{% endfor %}</ul>
+			</div>
+
+				
 				
 
 		<p><br><br><b>Faith leaders</b></p>
-		<ul>
-				{% for leader in leaders %}
-					{% if leader.faithleader == 1 %}
-						<li><a href="{% url 'leaderView' leader.id %}">{% if leader.tite %}{{leader.tite}} {% endif %}{{leader.firstname}} {{leader.lastname}} ({{leader.organizations}} - {{leader.city}})</a></li>
+
+
+		{% for denomination in denominations %}
+			<div id="greenbackground">
+				<p><b>{{denomination}}</b></p>
+				<ul>{% for leader in leaders %}
+					{% if leader.faithleader == 1 and leader.denomination == denomination %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} ({{leader.organizations}} - {{leader.city}})</a></li>
 					{% endif %}
 				{% endfor %}</ul>
+			</div>
+		{% endfor %}
+
+			<div id="greenbackground">
+				<p><b>Other</b</p>:
+				<ul>{% for leader in leaders %}
+					{% if leader.faithleader == 1 and leader.denomination not in denominations %}
+						<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} ({{leader.organizations}} - {{leader.city}})</a></li>
+					{% endif %}
+				{% endfor %}</ul>
+			</div>
 
 
+
+
+
+
+<!--
 		<p><br><br><b>Community leaders</b></p>
 				{% for leader in leaders %}
 					{% if leader.communityleader == 1 %}
@@ -37,6 +100,7 @@
 					{% endif %}
 				{% endfor %}
 
+-->
 				
 		</div>
 

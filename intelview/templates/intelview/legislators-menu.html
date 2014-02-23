@@ -8,17 +8,25 @@
 
 		<div id="bluebackground" class="targetinfo">
 				<b>Senate EHEA Targets</b>
+				
+			{% for r in regions %}
+				<p><i>{{r}}</i>
 				<ul>{% for Senator in Senators %}
-						{% if Senator.EHEAtarget == 1 %}<li><a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}} ({{Senator.party}}) -SD {{Senator.district.number}}</a></li>{% endif %}
-				{% endfor %}</ul><br>
+						{% if Senator.EHEAtarget == 1 and Senator.region.name == r %}<li><a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}} ({{Senator.party}}) -SD {{Senator.district.number}}</a></li>{% endif %}
+				{% endfor %}</ul></p>
+			{% endfor %}
+
 		</div>
 		
 		<div id="bluebackground" class="targetinfo" style="width:500px;">
 			<span><b>House EHEA Targets</b></span><br>
 			<div class="threecolumns" style="margin: -10px">
+			{% for r in regions %}
+				<p><i>{{r}}</i>			
 				<ul>{% for Representative in Representatives %}
-					{% if Representative.EHEAtarget == 1 %}<li><a href="{% url 'RepresentativeView' Representative.id %}">{{Representative.lastname}} ({{Representative.party}}) -HD {{Representative.district.number}}</a></li>{% endif %}
-				{% endfor %}</ul>
+					{% if Representative.EHEAtarget == 1 and Representative.region.name == r %}<li><a href="{% url 'RepresentativeView' Representative.id %}">{{Representative.lastname}} ({{Representative.party}}) -HD {{Representative.district.number}}</a></li>{% endif %}
+				{% endfor %}</ul></p>
+			{% endfor %}
 			</div>
 		</div>
 

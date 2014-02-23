@@ -5,9 +5,38 @@
 		<h2>{{leader.tite}} {{leader.firstname}} {{leader.lastname}}</h2>
 	</div>
 	
-	<p>Region: {{leader.region}}</p>
-	<p>Lives in county: {{leader.county}}</p>
-	<p>Lives in city: {{leader.city}}</p>
+	<p>
+	
+	<p><b>Lives in</b>
+		<ul><li><i>Region</i>: {{leader.region}}</li>
+		<li><i>County</i>: {{leader.county}}</li>
+		<li><i>City</i>: {{leader.city}}</li>
+	</ul></p>
+	
+
+	{% if leader.faithleader == 1 %}
+	<br><p><b>Faith leader notes</b></p>
+	<ul>
+		<li><i>Congregation</i>: {{leader.organizations}}</li>
+		<li><i>Denomination</i>: {{leader.denomination}}</li>
+		<li><i>Lay or clergy?</i>: {{leader.title}}</li>
+		<li><i>Signed ENDA support letter?</i>: {% if leader.signedENDA == 1 %}Yes{% else %}No {% endif %}</li>
+	</ul>
+	{% else %}
+		<br><p><b>Works with group</b>: {{leader.organizations}}</b></p>
+	{% endif %}
+
+	
+	<br><p><b>Organizer's notes</b>:  {{leader.otherNotes}}</p>
+
+
+	<br><p><b>Contact info</b></p>
+	<ul>
+		<li><i>Email</i>: {{leader.email }}</li>
+		<li><i>Phone</i>: {{leader.phone }}</li>
+		<li><i>Street address</i>: {{leader.address }}, {{leader.city}}, OH {{leader.zip}}</li>
+	</ul>
+
 	
 </div>
 {% endblock%}

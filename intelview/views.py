@@ -41,12 +41,15 @@ def places(request):
 def legislators(request):
 	Senators = Senator.objects.order_by('lastname').all()
 	Representatives = Representative.objects.order_by('lastname').all()
-	return render(request, "legislators-menu.html", {'Senators': Senators, 'Representatives':Representatives})
+	regions = ['Northwest', 'Northeast', 'Southwest','Southeast','Central']
+	return render(request, "legislators-menu.html", {'Senators': Senators, 'Representatives':Representatives, 'regions':regions})
 
 @login_required
 def leaders(request):
 	leaders = Leader.objects.all()
-	return render(request, "leaders-menu.html", {'leaders': leaders})
+	denominations = ['Catholic', 'Episcopal', 'Lutheran', 'ELCA', 'non-denom', 'Presbyterian', 'Reformed Catholic', 'Reform Judaism', 'UCC', 'UCC/UMC', 'UMC', 'UU', 'UUA', 'UUC']
+	return render(request, "leaders-menu.html", {'leaders': leaders, 'denominations': denominations})
+
 
 @login_required
 def businesses(request):
