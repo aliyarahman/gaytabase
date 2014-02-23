@@ -3,21 +3,33 @@
 {% block content %}
 	<p>
 	<img class = "legpic" src="{% static 'intelview/SenatePics/'%}{{senator.lastname}}Sen{{senator.party}}.jpg">
-	<table>
 	<h1>{{senator.firstname}} {{senator.lastname}} ({{senator.party}})</h1>
 	<h3>Represents: <a href="{% url 'SDView' senator.district.id %}">Senate District {{senator.district.number}}</a></h3>
-	<tr><td><b>Region of Ohio</b>: 
-	<tr><td><b>Committees in 130th General Assembly</b>: {{senator.committees2014}}
-	<tr><td><b>Target for EHEA in 130th: </b>{{senator.EHEAtarget}}</td></tr>
-	<tr><td><b>Most current known stance on EHEA: </b>{{senator.currentEHEAstance}}</td></tr>
-	<tr><td><b>EHEA standalone bill co-sponsor in 130th Gen. Assembly: </b></td></tr>
-	<tr><td><b>EHEA vote in 2009:</b> {{senator.EHEA2009Vote}}</td></tr>
-	<tr><td><b>Profession</b>: </td></tr>
-	<tr><td><b>Faith affiliation</b>:</td></tr>
-	</table>
+	<b>Region of Ohio</b>: <a href="{% url 'regionView' senator.region.id %}">{{senator.region.name}}</a>
+
+
+	<br><br><br>
+	<p><b>Target for EHEA in 130th</b>:{% if senator.EHEAtarget == 1 %} Yes{% else %} No{% endif %}</p>
+	<p><b>Most current known stance on EHEA: </b>{{senator.currentEHEAstance}}</p>
+	<p><b>EHEA standalone bill co-sponsor in 130th</b>:{% if senator.lastname == "LaRose" %} Yes {% else %} No {% endif %} </p>
+	<p><b>EHEA vote in 2009:</b> {{senator.EHEA2009Vote}}</p>
+
+
 	<br><br>
-	<h3>Donors</h3>
-	<br><br><h3>JobsOhio Companies with offices in district</h3>
+	<p><b>Office phone</b>: {{senator.officePhone}}</p>
+	<p><b>Committees in 130th General Assembly</b>: {{senator.committees2014}}</p>
+	<p><b>Up for re-election in 2014?</b>: {{senator.upin2014}}</p>	
+	<p><b>Term-limited in</b>: {{senator.termLimit}}</p>
+	<p><b>Other notes</b>: {{senator.otherNotes}}</p>
+
+	<br><br>
+	<p><b>Donors</b>:</p>
+	<p><b>JobsOhio Companies with offices in district</b>:</p>
+	
+	<br><br>
+	<p><b>Profession</b>: </p>
+	<p><b>Faith affiliation</b>:</p>
+	
 	<br><br>
 	<h3>Lobby Day 2013 notes</h3>
 	<i>EO leaders attending:</i>         

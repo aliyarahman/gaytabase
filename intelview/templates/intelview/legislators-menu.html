@@ -3,20 +3,44 @@
 {% block content %}
 <div class="contentholder">
 	<div class="formheader"><h2>Legislators</h2></div>
-		<div class="menupage">
+	
+	<div class="menupage">
 
-		<p><br><br><b>Senators</b></p>
-				{% for Senator in Senators %}
-					<a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}}</a> - 
-				{% endfor %}
-
-		<p><br><br><b>House Representatives</b></p>
-				{% for Representative in Representatives %}
-					<a href="{% url 'RepresentativeView' Representative.id %}">{{Representative.lastname}}</a> - 
-				{% endfor %}
-
+		<div id="bluebackground" class="targetinfo">
+				<b>Senate EHEA Targets</b>
+				<ul>{% for Senator in Senators %}
+						{% if Senator.EHEAtarget == 1 %}<li><a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}} ({{Senator.party}}) -SD {{Senator.district.number}}</a></li>{% endif %}
+				{% endfor %}</ul><br>
+		</div>
+		
+		<div id="bluebackground" class="targetinfo" style="width:500px;">
+			<span><b>House EHEA Targets</b></span><br>
+			<div class="threecolumns" style="margin: -10px">
+				<ul>{% for Representative in Representatives %}
+					{% if Representative.EHEAtarget == 1 %}<li><a href="{% url 'RepresentativeView' Representative.id %}">{{Representative.lastname}} ({{Representative.party}}) -HD {{Representative.district.number}}</a></li>{% endif %}
+				{% endfor %}</ul>
+			</div>
 		</div>
 
+
+
+
+		<div id="greenbackground" class="districtinfo">
+			<p><b>Senators</b></p>
+				{% for Senator in Senators %}
+					{% if Senator.EHEAtarget == 1 %}<span class="target">{% endif %}<a href="{% url 'SenatorView' Senator.id %}">{{Senator.lastname}}</a> {% if Senator.EHEAtarget == 1 %}</span>{% endif %} -
+				{% endfor %}
+		</div>
+
+		<div id="greenbackground" class="districtinfo">
+			<p><b>House Representatives</b></p>
+				{% for Representative in Representatives %}
+					{% if Representative.EHEAtarget == 1 %}<span class="target">{% endif %}<a href="{% url 'RepresentativeView' Representative.id %}" >{{Representative.lastname}}</a>{% if Representative.EHEAtarget == 1 %}</span>{% endif %} -
+				{% endfor %}
+		</div>
+
+
+	</div>
 </div>
 
 

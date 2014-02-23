@@ -6,16 +6,21 @@
 	<h1 class="formheader">House District {{housedistrict.number}}</h1>
 
 	<img class="districtpic" src="{% static 'intelview/DistrictPics/'%}HD{{housedistrict.number}}.png">
-	<br><p><b>In region</b>: <a href="{% url 'regionView' housedistrict.region.id %}">{{housedistrict.region.name}}</a></p>
-	<p><br><b>Represented in 2014 by</b>: </p>
+	<br><br><br>
 
-	<p><br><b>Nested in:</b> <a href="{% url 'SDView' housedistrict.nestedInSD.id %}">Senate District {{housedistrict.nestedInSD.number}}</a></p>
-	<p><br><b>Counties:</b> {{housedistrict.counties}}</p>
-	<p><br><b>Major cities:</b> {{housedistrict.cities}}</p>
+	<div id = "bluebackground" class="districtinfo">
+		<p><b>In region</b>: <a href="{% url 'regionView' housedistrict.region.id %}">{{housedistrict.region.name}}</a></p>
+		<p><br><b>Nested in:</b> <a href="{% url 'SDView' housedistrict.nestedInSD.id %}">Senate District {{housedistrict.nestedInSD.number}}</a></p>
+	</div>
 
-
-
+	<div class="legsidebar"><b>Represented in 2014 by</b>:<a href="{% url 'RepresentativeView' representative.id %}"><br>Rep. {{representative.firstname}} {{representative.lastname}} ({{representative.party}})</a></p>
+	<img class = "legsmallpic" src="{% static 'intelview/HousePics/'%}{{representative.lastname}}Rep{{representative.party}}.jpg"></div>
 
 </div>
 
+
+
+
+
  {% endblock%}
+

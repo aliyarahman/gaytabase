@@ -3,22 +3,33 @@
 {% block content %}
 	<p>
 	<img class = "legpic" src="{% static 'intelview/HousePics/'%}{{representative.lastname}}Rep{{representative.party}}.jpg">
-	<table>
 	<h1>{{representative.firstname}} {{representative.lastname}} ({{representative.party}})</h1>
 	<h3>Represents: <a href="{% url 'HDView' representative.district.id %}">House District {{representative.district.number}}</a></h3>
-	<tr><td><b>Role in House</b>: {{representative.title}}
-	<tr><td><b>Region of Ohio</b>: 
-	<tr><td><b>Committees in 130th General Assembly</b>: {{representative.committees2014}}
-	<tr><td><b>Target for EHEA in 130th: </b>{{representative.EHEAtarget}}</td></tr>
-	<tr><td><b>Most current known stance on EHEA: </b>{{representative.currentEHEAstance}}</td></tr>
-	<tr><td><b>EHEA co-sponsor in 130th Gen. Assembly: </b></td></tr>
-	<tr><td><b>EHEA vote in 2009:</b> {{representative.EHEA2009Vote}}</td></tr>
-	<tr><td><b>Profession</b>: </td></tr>
-	<tr><td><b>Faith affiliation</b>:</td></tr>
-	</table>
+	<b>Region of Ohio</b>: <a href="{% url 'regionView' representative.region.id %}">{{representative.region.name}}</a>
+
+
+	<br><br><br>
+	<p><b>Target for EHEA in 130th</b>:{% if representative.EHEAtarget == 1 %} Yes{% else %} No{% endif %}</p>
+	<p><b>Most current known stance on EHEA: </b>{{representative.currentEHEAstance}}</p>
+	<p><b>EHEA standalone bill co-sponsor in 130th</b>:{% if representative.lastname == "LaRose" %} Yes {% else %} No {% endif %} </p>
+	<p><b>EHEA vote in 2009:</b> {{representative.EHEA2009Vote}}</p>
+
+
 	<br><br>
-	<h3>Donors</h3>
-	<br><br><h3>JobsOhio Companies with offices in district</h3>
+	<p><b>Office phone</b>: {{representative.officePhone}}</p>
+	<p><b>Committees in 130th General Assembly</b>: {{representative.committees2014}}</p>
+	<p><b>Up for re-election in 2014?</b>: {{representative.upin2014}}</p>	
+	<p><b>Term-limited in</b>: {{representative.termLimit}}</p>
+	<p><b>Other notes</b>: {{representative.otherNotes}}</p>
+
+	<br><br>
+	<p><b>Donors</b>:</p>
+	<p><b>JobsOhio Companies with offices in district</b>:</p>
+	
+	<br><br>
+	<p><b>Profession</b>: </p>
+	<p><b>Faith affiliation</b>:</p>
+	
 	<br><br>
 	<h3>Lobby Day 2013 notes</h3>
 	<i>EO leaders attending:</i>         

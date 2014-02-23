@@ -146,3 +146,59 @@ for row in reader:
 	hd = HouseDistrict(number = row[0], shortcode = hdshortcode, region = hdregion)
 	hd.nestedInSD = sd
 	hd.save()
+
+
+#Add Senators
+ifile = open('senator_data.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	sdistrict = SenateDistrict.objects.get(number=int(row[13]))
+	region = sdistrict.region
+	if row[4]=="1":
+		EHEAstance = "Yes"
+	if row[5]=="1":
+		EHEAstance = "No"
+	if row[6] == "1":
+		EHEAstance="Maybe"
+
+	if row[11] =="1":
+		upforelection = "Yes"
+	else:
+		upforelection = "No"	
+
+	if row[7]=="X":
+		target =1
+	else:
+		target=0
+
+	s = Senator(firstname=row[0], lastname=row[1], district=sdistrict, code=row[1], region=region, party = row[2], officePhone=row[3], currentEHEAstance=EHEAstance, EHEAtarget = target, EHEA2009Vote = row[8], committees2014=row[9], otherNotes = row[10], upin2014=upforelection, termLimit = row[12])
+	s.save()
+
+
+
+#Add Representatives
+ifile = open('representative_data.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	hdistrict = HouseDistrict.objects.get(number=int(row[14]))
+	region = hdistrict.region
+	if row[6]=="1":
+		EHEAstance = "Yes"
+	if row[7]=="1":
+		EHEAstance = "No"
+	if row[8] == "1":
+		EHEAstance="Maybe"
+	if row[9]=="X":
+		target =1
+	else:
+		target=0
+	if row[1]=="Adams":
+		if row[0]=="John":
+			repcode = "AdamsJ"
+		else:
+			repcode = "AdamsR"
+	else:
+		repcode = row[1]
+
+	r = Representative(firstname = row[0], lastname = row[1], district = hdistrict, code=repcode, region=region, party = row[2], title = row[3], officePhone=row[4], otherPhone = row[5], currentEHEAstance=EHEAstance, EHEAtarget = target, EHEA2009Vote = row[10], committees2014=row[11], profession=row[12], otherNotes = row[13], upin2014="Yes")
+	r.save()

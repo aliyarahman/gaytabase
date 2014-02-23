@@ -6,18 +6,23 @@
 	<h1 class="formheader">Senate District {{senatedistrict.number}}</h2>
 
 	<img class="districtpic" src="{% static 'intelview/DistrictPics/'%}SD{{senatedistrict.number}}.png">
-	<br><p><b>In region</b>: <a href="{% url 'regionView' senatedistrict.region.id %}">{{senatedistrict.region.name}}</a></p>
-	<p><br><b>Represented in 2014 by:</b></p>
+	<br><br><br>
 
-	<p><br><b>Nests:</b>
+	<div id="greenbackground" class="districtinfo">
+		<p><b>In region</b>: <a href="{% url 'regionView' senatedistrict.region.id %}">{{senatedistrict.region.name}}</a></p>
+		<p><br><b>Nests:</b>
 		{% for h in housedistricts %}
 		<a href="{% url 'HDView' h.id %}">House District {{h.number}}</a>
 		{% endfor %}
+	</div>
 
-
-	<p><br><b>Counties:</b> {{senatedistrict.counties}}</p>
-	<p><br><b>Major cities:</b> {{senatedistrict.cities}}</p>
+	<div class="legsidebar"><p><b>Represented in the 130th by</b>: <a href="{% url 'SenatorView' senator.id %}"><br>Sen. {{senator.firstname}} {{senator.lastname}} ({{senator.party}})</a></p>
+	<img class = "legsmallpic" src="{% static 'intelview/SenatePics/'%}{{senator.lastname}}Sen{{senator.party}}.jpg">
+	</div>
 
 </div>
+	
+
+
 
  {% endblock%}

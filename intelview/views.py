@@ -68,12 +68,14 @@ def help(request):
 def SDView(request, SD_id):
 	senatedistrict = get_object_or_404(SenateDistrict, pk=SD_id)
 	housedistricts = HouseDistrict.objects.filter(nestedInSD = senatedistrict)
-	return render(request, "SD.html", {'senatedistrict': senatedistrict, 'housedistricts':housedistricts })
+	senator = Senator.objects.get(district = senatedistrict)
+	return render(request, "SD.html", {'senatedistrict': senatedistrict, 'housedistricts':housedistricts, 'senator':senator })
 
 @login_required
 def HDView(request, HD_id):
 	housedistrict = get_object_or_404(HouseDistrict, pk=HD_id)
-	return render(request, "HD.html", {'housedistrict': housedistrict })
+	representative = Representative.objects.get(district = housedistrict)
+	return render(request, "HD.html", {'housedistrict': housedistrict, 'representative':representative })
 
 @login_required
 def regionView(request, region_id):
@@ -82,7 +84,9 @@ def regionView(request, region_id):
 	cities = City.objects.filter(region = region)
 	senatedistricts = SenateDistrict.objects.filter(region = region)
 	housedistricts = HouseDistrict.objects.filter(region = region)
-	return render(request, "region.html", {'region':region, 'counties':counties, 'senatedistricts':senatedistricts, 'housedistricts':housedistricts, 'cities':cities})
+	senators = Senator.objects.filter(region = region)
+	representatives = Representative.objects.filter(region=region)
+	return render(request, "region.html", {'region':region, 'counties':counties, 'senatedistricts':senatedistricts, 'housedistricts':housedistricts, 'cities':cities, 'senators':senators, 'representatives':representatives})
 
 @login_required
 def countyView(request, county_id):

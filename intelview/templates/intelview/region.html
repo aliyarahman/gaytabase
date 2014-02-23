@@ -4,8 +4,34 @@
 <div class="contentholder">
 	<h1 class="formheader">{{region.name}} Ohio</h2>
 
+
+
+
+	<div class="regionsection">		
+		<div class="regionsubsection" id="greenbackground">
+			<p><b>Senators:</b>
+			<ul>
+			{% for senator in senators %}
+				<li><a href="{% url 'SenatorView' senator.id %}">{{senator.firstname}} {{senator.lastname}} ({{senator.party}})</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		
+		<div class="regionsubsection" style="width: 650px;" id="greenbackground">
+			<p><b>Representatives:</b>
+			<div class="regionlegsection"><ul>
+			{% for representative in representatives %}
+				<li><a href="{% url 'RepresentativeView' representative.id %}">{{representative.firstname}} {{representative.lastname}} ({{representative.party}})</a></li>
+			{% endfor %}
+			</ul></div>
+		</div>
+	</div>
+
+
+
+
 	<div class="regionsection">
-		<div class="regionsubsection">
+		<div class="regionsubsection" id="purplebackground">
 		<p><b>Senate Districts:</b>
 			<ul>
 			{% for sd in senatedistricts %}
@@ -14,7 +40,7 @@
 			</ul>
 		</div>
 		
-		<div class="regionsubsection">
+		<div class="regionsubsection" id="purplebackground">
 		<p><b>House Districts:</b>
 			<ul>
 			{% for hd in housedistricts %}
@@ -23,7 +49,7 @@
 			</ul>
 		</div>
 		
-		<div class="regionsubsection">
+		<div class="regionsubsection" id="bluebackground">
 			<p><b>Counties:</b>
 			<ul>
 			{% for county in counties %}
@@ -32,7 +58,7 @@
 			</ul>
 		</div>
 		
-		<div class="regionsubsection">
+		<div class="regionsubsection" id="bluebackground">
 			<p><b>Cities:</b>
 			<ul>
 			{% for city in cities %}
@@ -41,7 +67,8 @@
 			</ul>
 		</div>
 	</div>
-	
+
+
 	
 </div>
 
