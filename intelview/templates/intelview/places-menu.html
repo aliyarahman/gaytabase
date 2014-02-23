@@ -21,7 +21,6 @@
 					<a href="{% url 'HDView' housedistrict.id %}">HD{{housedistrict.number}}</a>{% if housedistrict.number != 99%} -{% endif %} 
 				{% endfor %}</p></div>
 
-
 		<div id="greenbackground"><b>Counties</b><p>
 				{% for county in counties %}
 					<a href="{% url 'countyView' county.id %}">{{county.name}}</a>{% if county.name != "Wyandot"%} -{% endif %}

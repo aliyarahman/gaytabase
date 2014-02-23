@@ -202,3 +202,34 @@ for row in reader:
 
 	r = Representative(firstname = row[0], lastname = row[1], district = hdistrict, code=repcode, region=region, party = row[2], title = row[3], officePhone=row[4], otherPhone = row[5], currentEHEAstance=EHEAstance, EHEAtarget = target, EHEA2009Vote = row[10], committees2014=row[11], profession=row[12], otherNotes = row[13], upin2014="Yes")
 	r.save()
+
+
+#Add Faith leaders
+ifile = open('faith.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	otherNotes = " "
+	region = Region.objects.get(shortcode =row[4])
+	try:
+		city = City.objects.get(name = row[6])
+	except:
+		print row[6]
+	county = city.county
+	if row[7]:
+		zip = row[7]
+	else:
+		zip = ""
+	if row[11]=='yes':
+		signedENDA = 1
+	else:
+		signedENDA = 0
+	if row[12]=='yes':
+		otherNotes=otherNotes+("\nAgreed in 2013 to help Cheri Holdridge plan faith organizing summit")
+	if row[12]!='yes' and row[13]=='yes':
+		otherNotes=otherNotes+("\nReceived info from Cheri Holdridge in 2013 about faith organizing summit")
+	if row[14]:
+		otherNotes=otherNotes+("\nWas referred to Cheri Holdridge by "+row[14])
+	if row[15]:
+		otherNotes=otherNotes+("\nWas referred to Cheri Holdridge by "+row[15])
+	r = Leader(lastname = row[0], firstname = row[1], organizations = row[2], denomination = row[3], region=region, address = row[5], city = city, county = county, zip = row[7], title = row[8], email = row[9], phone = row[10], signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =1, volunteerleader =0, businessleader =0)
+	r.save()

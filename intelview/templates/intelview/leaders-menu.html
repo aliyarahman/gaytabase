@@ -14,11 +14,13 @@
 				
 
 		<p><br><br><b>Faith leaders</b></p>
+		<ul>
 				{% for leader in leaders %}
 					{% if leader.faithleader == 1 %}
-						<a href="{% url 'leaderView' leader.id %}">{% if leader.tite %}{{leader.tite}} {% endif %}{{leader.firstname}} {{leader.lastname}}</a> - 
+						<li><a href="{% url 'leaderView' leader.id %}">{% if leader.tite %}{{leader.tite}} {% endif %}{{leader.firstname}} {{leader.lastname}} ({{leader.organizations}} - {{leader.city}})</a></li>
 					{% endif %}
-				{% endfor %}
+				{% endfor %}</ul>
+
 
 		<p><br><br><b>Community leaders</b></p>
 				{% for leader in leaders %}
@@ -26,6 +28,15 @@
 						<a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}}</a> - 
 					{% endif %}
 				{% endfor %}
+
+
+		<p><br><br><b>Small business leaders</b></p>
+				{% for leader in leaders %}
+					{% if leader.businessleader == 1 %}
+						<a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}}</a> - 
+					{% endif %}
+				{% endfor %}
+
 				
 		</div>
 

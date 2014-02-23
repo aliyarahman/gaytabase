@@ -159,19 +159,20 @@ class Business(models.Model):
 
 class Organization(models.Model):
 	name = models.CharField(max_length=45, unique = True)
-	LocalStateNationalAffinity = models.CharField(max_length=40)
-	description = models.CharField(max_length=400)
-	ally = models.IntegerField(max_length=1)
-# add column for affinity group
-# add column for conservative
-# add column for nonprofit
-	primaryContact = models.CharField(max_length=400)
-	regions = models.ManyToManyField(Region)
+	LocalStateNationalAffinity = models.CharField(max_length=4, default = "")
+	description = models.CharField(max_length=400, default = "")
+	progressiveOrg = models.IntegerField(max_length=1, default =0)
+	affinityGroup = models.IntegerField(max_length=1, default =0)
+	nonprofitOrg = models.IntegerField(max_length=1, default =0)
+	conservativeOrg = models.IntegerField(max_length=1, default =0)			
+	primaryContact = models.CharField(max_length=400, default = "")
+	regions = models.ManyToManyField(Region, default = [])
 	counties = models.ManyToManyField(County, default = [])
-	cities = models.ManyToManyField(City)
-	inSDs = models.ManyToManyField(SenateDistrict)
-	inHDs = models.ManyToManyField(HouseDistrict)
-	otherNotes = models.CharField(max_length=400)		
+	cities = models.ManyToManyField(City, default = [])
+	inSDs = models.ManyToManyField(SenateDistrict, default = [])
+	inHDs = models.ManyToManyField(HouseDistrict, default = [])
+	otherNotes = models.CharField(max_length=400, default = "")
+
 	def __unicode__(self):
 		return self.name
 
@@ -179,22 +180,24 @@ class Organization(models.Model):
 class Leader(models.Model):
 	firstname = models.CharField(max_length=400)
 	lastname = models.CharField(max_length=400)
-	tite= models.CharField(max_length=400)
-	email = models.CharField(max_length=45)
-	phone = models.CharField(max_length=400)
-	address = models.CharField(max_length=400)
-	cities = models.ManyToManyField(City)
-	county = models.ForeignKey(County)
-	region = models.ForeignKey(Region)
-	inSD = models.ForeignKey(SenateDistrict)
-	inHD = models.ForeignKey(HouseDistrict)
+	title= models.CharField(max_length=400, default ="")
+	email = models.CharField(max_length=45, default ="")
+	phone = models.CharField(max_length=400, default ="")
+	address = models.CharField(max_length=400, default ="")
+	city = models.ForeignKey(City, default ="")
+	county = models.ForeignKey(County, default ="")
+	zip = models.CharField(max_length=12, default = "")
+	region = models.ForeignKey(Region, default ="")
+#	inSD = models.ForeignKey(SenateDistrict, default ="")
+#	inHD = models.ForeignKey(HouseDistrict, default ="")
 	communityleader = models.IntegerField(max_length=1)
 	faithleader = models.IntegerField(max_length=1)
 	volunteerleader = models.IntegerField(max_length=1)
-	denomination = models.CharField(max_length=400)
-	organizations = models.ManyToManyField(Organization)
-	otherNotes = models.CharField(max_length=400)
+	businessleader = models.IntegerField(max_length=1)
+	denomination = models.CharField(max_length=400, default ="")
+	organizations = models.CharField(max_length=400, default = "")
+	otherNotes = models.CharField(max_length=400, default ="")
+	signedENDA = models.IntegerField(max_length=1)
 	
 	def __unicode__(self):
 		return self.firstname
-		
