@@ -8,9 +8,9 @@
 	<p>
 	
 	<p><b>Lives in</b>
-		<ul><li><i>Region</i>: {{leader.region}}</li>
-		<li><i>County</i>: {{leader.county}}</li>
-		<li><i>City</i>: {{leader.city}}</li>
+		<ul><li><i>Region</i>: <a href="{% url 'regionView' leader.region.id %}">{{leader.region.name}}</a></li>
+		<li><i>County</i>: <a href="{% url 'countyView' leader.county.id %}">{{leader.county.name}}</a></li>
+		<li><i>City</i>: <a href="{% url 'cityView' leader.city.id %}">{{leader.city.name}}</a></li>
 	</ul></p>
 	
 

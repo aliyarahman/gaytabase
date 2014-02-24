@@ -7,7 +7,7 @@
 
 
 	<p><br><br><b>Region</b>: <a href="{% url 'regionView' city.region.id %}">{{city.region.name}}</a></p>
-	<p><br><b>In Counties:</b> {{city.county}}</p>
+	<p><br><b>In Counties:</b> <a href="{% url 'countyView' city.county.id %}">{{city.county.name}}</a></p>
 	<p><br><b>Population:</b> {{city.population}}
 
 </div>
