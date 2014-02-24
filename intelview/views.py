@@ -89,7 +89,8 @@ def regionView(request, region_id):
 	housedistricts = HouseDistrict.objects.filter(region = region)
 	senators = Senator.objects.filter(region = region)
 	representatives = Representative.objects.filter(region=region)
-	return render(request, "region.html", {'region':region, 'counties':counties, 'senatedistricts':senatedistricts, 'housedistricts':housedistricts, 'cities':cities, 'senators':senators, 'representatives':representatives})
+	leaders = Leader.objects.filter(region=region)
+	return render(request, "region.html", {'region':region, 'counties':counties, 'senatedistricts':senatedistricts, 'housedistricts':housedistricts, 'cities':cities, 'senators':senators, 'representatives':representatives, 'leaders':leaders})
 
 @login_required
 def countyView(request, county_id):

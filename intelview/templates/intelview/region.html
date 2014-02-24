@@ -27,11 +27,30 @@
 		</div>
 	</div>
 
-
+	<div id="purplebackground" style="padding:20px; margin-bottom: 20px">
+		<p><b>Faith leaders:</b>
+		<div style="display: inline-block; vertical-align: top; -moz-column-count:3; -webkit-column-count:3; column-count:3;">
+			<ul>
+			{% for leader in leaders %}
+				{% if leader.faithleader == 1 %}<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} ({{leader.denomination}})</a></li>{% endif %}
+			{% endfor %}
+			</ul></p>
+		</div>
+	</div>
+	<div id="purplebackground" style="padding:20px">
+		<p><b>Volunteer leaders:</b>
+		<div style="vertical-align: top; -moz-column-count:3; -webkit-column-count:3; column-count:3;">
+			<ul>
+			{% for leader in leaders %}
+				{% if leader.volunteerleader == 1 %}<li><a href="{% url 'leaderView' leader.id %}">{{leader.firstname}} {{leader.lastname}} </a></li>{% endif %}
+			{% endfor %}
+			</ul></p>
+		</div>
+	</div>
 
 
 	<div class="regionsection">
-		<div class="regionsubsection" id="purplebackground">
+		<div class="regionsubsection" id="greenbackground">
 		<p><b>Senate Districts:</b>
 			<ul>
 			{% for sd in senatedistricts %}
@@ -40,7 +59,7 @@
 			</ul>
 		</div>
 		
-		<div class="regionsubsection" id="purplebackground">
+		<div class="regionsubsection" id="greenbackground">
 		<p><b>House Districts:</b>
 			<ul>
 			{% for hd in housedistricts %}
