@@ -12,7 +12,7 @@ from intelview.models import Region, County, City, Senator, Representative, Hous
 from django.contrib.auth.models import User
 import csv
 
-'''
+
 #Add an admin user, two staff users, and a volunteer user
 aliya = User.objects.create_user("aliya@equalityohio.org", "aliya@equalityohio.org", "P@ssw0rd123")
 aliya.first_name = "Aliya"
@@ -59,6 +59,27 @@ first_name = "Volunteer"
 last_name ="One"
 volunteer1.save()
 
+jen = User.objects.create_user("jen@equalityohio.org","jen@equalityohio.org", "P@ssw0rd123")
+jen.first_name = "Jen"
+jen.last_name ="Lynch"
+jen.save()
+
+rob = User.objects.create_user("rob@equalityohio.org","rob@equalityohio.org", "P@ssw0rd123")
+rob.first_name = "Rob"
+rob.last_name ="Young"
+rob.save()
+
+leilani = User.objects.create_user("leilani@equalityohio.org","leilani@equalityohio.org", "P@ssw0rd123")
+leilani.first_name = "Leilani"
+leilani.last_name ="White"
+leilani.save()
+
+brittany = User.objects.create_user("brittany@equalityohio.org","brittany@equalityohio.org", "P@ssw0rd123")
+brittany.first_name = "Brittany"
+brittany.last_name ="Hodge"
+brittany.save()
+
+
 
 #Create regions
 NW = Region.objects.create(name = "Northwest", shortcode = "NW")
@@ -104,6 +125,8 @@ for row in reader:
 	c.region = c.county.region
 	c.save()
 
+
+
 #Add SDs
 NEsds = [13,18,21,22,23,24,25,27,28,29,32,33]
 NWsds = [1,2,11,12,14,26]
@@ -127,8 +150,31 @@ for row in reader:
 		sdregion = Region.objects.get(shortcode="SE")
 	else:
 		sdregion = Region.objects.get(shortcode="CENT")
-	sd = SenateDistrict(number = row[0], shortcode = sdshortcode, region = sdregion)	
+	if row[2]:
+		DPI=row[2]
+	elif row[3]:
+		DPI=row[3]+" (2012)"
+	else:
+		DPI=""
+	sd = SenateDistrict(number = row[0], shortcode = sdshortcode, region = sdregion, DPI = DPI)	
 	sd.save()
+
+ifile = open('SD_data.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	SD = SenateDistrict.objects.get(number=row[0])
+	for i in range(4,15):
+		if row[i] != "":
+			county = County.objects.get(name=row[i])
+			SD.counties.add(county)
+	SD.save()
+	SD = SenateDistrict.objects.get(number=row[0])
+	print len(SD.counties.all())
+	for county in SD.counties.all():
+		cities = City.objects.filter(county = county)
+		for city in cities:
+			SD.cities.add(city)
+	SD.save()
 
 
 
@@ -143,9 +189,34 @@ for row in reader:
 	sdnumber = int(row[1])
 	sd = SenateDistrict.objects.get(number=sdnumber)
 	hdregion = sd.region
-	hd = HouseDistrict(number = row[0], shortcode = hdshortcode, region = hdregion)
+	if row[3]:
+		DPI=row[3]
+	elif row[4]:
+		DPI=row[4]+" (2012)"
+	else:
+		DPI=""
+	hd = HouseDistrict(number = row[0], shortcode = hdshortcode, region = hdregion, DPI = DPI)
 	hd.nestedInSD = sd
 	hd.save()
+
+ifile = open('HD_data.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	HD = HouseDistrict.objects.get(number=row[0])
+	print HD.shortcode
+	for i in range(5,11):
+		if row[i] != "":
+			print row[i]
+			county = County.objects.get(name=row[i])
+			HD.counties.add(county)
+	HD.save()
+	HD = HouseDistrict.objects.get(number=row[0])
+	for county in HD.counties.all():
+		cities = City.objects.filter(county = county)
+		for city in cities:
+			HD.cities.add(city)
+	HD.save()
+
 
 
 #Add Senators
@@ -230,7 +301,7 @@ for row in reader:
 		otherNotes=otherNotes+row[15]
 	r = Leader(lastname = row[0], firstname = row[1], organizations = row[2], denomination = row[3], region=region, address = row[5], city = city, county = county, zip = row[7], title = row[8], email = row[9], phone = row[10], signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =1, volunteerleader =0, businessleader =0)
 	r.save()
-'''
+
 
 #Add volunteer leaders
 ifile = open('supervols.csv', "rb")
@@ -252,3 +323,10 @@ for row in reader:
 		otherNotes=otherNotes+row[15]
 	v = Leader(lastname = row[0], firstname = row[1], organizations = row[2], denomination = row[3], region=region, address = row[5], city = city, county = county, zip = row[7], title = row[8], email = row[9], phone = row[10], signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =0, volunteerleader =1, businessleader =0)
 	v.save()
+leaders = Leader.objects.all()
+for l in leaders:
+	for hd in l.county.housedistrict_set.all():
+		l.HDs.add(hd)
+	for sd in l.county.senatedistrict_set.all():
+		l.SDs.add(sd)
+	l.save()

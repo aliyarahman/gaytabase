@@ -6,6 +6,10 @@
 	<h1 class="formheader">Senate District {{senatedistrict.number}}</h2>
 
 	<img class="districtpic" src="{% static 'intelview/DistrictPics/'%}SD{{senatedistrict.number}}.png">
+	
+		<div class="legsidebar" style="margin-left: 30px; margin-bottom: 20px"><p><b>Represented in the 130th by</b>: <a href="{% url 'SenatorView' senator.id %}"><br>Sen. {{senator.firstname}} {{senator.lastname}} ({{senator.party}})</a></p>
+	<img class = "legsmallpic" src="{% static 'intelview/SenatePics/'%}{{senator.lastname}}Sen{{senator.party}}.jpg">
+	</div>
 	<br><br><br>
 
 	<div id="greenbackground" class="districtinfo">
@@ -13,11 +17,26 @@
 		<p><br><b>Nests:</b>
 		{% for h in housedistricts %}
 		<a href="{% url 'HDView' h.id %}">House District {{h.number}}</a>
-		{% endfor %}
-	</div>
+		{% endfor %}</p>
 
-	<div class="legsidebar"><p><b>Represented in the 130th by</b>: <a href="{% url 'SenatorView' senator.id %}"><br>Sen. {{senator.firstname}} {{senator.lastname}} ({{senator.party}})</a></p>
-	<img class = "legsmallpic" src="{% static 'intelview/SenatePics/'%}{{senator.lastname}}Sen{{senator.party}}.jpg">
+		<p><br><b>Spans counties:</b>
+		{% for c in senatedistrict.counties.all %}
+		<a href="{% url 'countyView' c.id %}">{{c.name}}</a> -
+		{% endfor %}</p>
+		
+		<p><br><b>Spans cities:</b>
+		{% for c in senatedistrict.cities.all %}
+		<a href="{% url 'cityView' c.id %}">{{c.name}}</a> -
+		{% endfor %}</p>
+
+		<p><br><b>Democratic Performance Index (DPI)</b>: {{senatedistrict.DPI}}</p>
+
+		<p><br><b>Faith leaders in this district:</b> {% for l in senatedistrict.leader_set.all %}{% if l.faithleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}} ({{l.denomination}})</a> - {% endif %}{% endfor %}</p>
+		
+		<p><br><b>Volunteer leaders in this district:</b> {% for l in senatedistrict.leader_set.all %}{% if l.volunteerleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}}</a> - {% endif %}{% endfor %}</p>
+
+
+
 	</div>
 
 </div>

@@ -5,13 +5,22 @@
 		<h2>{{leader.tite}} {{leader.firstname}} {{leader.lastname}}</h2>
 	</div>
 	
-	<p>
+		{% if leader.volunteerleader == 1 %}<h3 style="text-align: center">Volunteer leader</h3><br>{% endif %}
+		{% if leader.faithleader == 1 %}<h3 style="text-align: center">Faith leader</h3><br>{% endif %}
+		{% if leader.business == 1 %}<h3 style="text-align: center">Business leader</h3><br>{% endif %}
+		{% if leader.communityleader == 1 %}<h3 style="text-align: center">Community leader</h3><br>{% endif %}
+	</p>
 	
 	<p><b>Lives in</b>
 		<ul><li><i>Region</i>: <a href="{% url 'regionView' leader.region.id %}">{{leader.region.name}}</a></li>
 		<li><i>County</i>: <a href="{% url 'countyView' leader.county.id %}">{{leader.county.name}}</a></li>
 		<li><i>City</i>: <a href="{% url 'cityView' leader.city.id %}">{{leader.city.name}}</a></li>
 	</ul></p>
+
+
+	<p><br><b>Lives in or near Senate District(s):</b> {% for sd in leader.SDs.all %}<a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a> - {% endfor %}</p>
+	<p><br><b>Lives in or near House District(s):</b> {% for hd in leader.HDs.all %}<a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a> - {% endfor %}</p>
+
 	
 
 	{% if leader.faithleader == 1 %}
@@ -34,7 +43,7 @@
 	<ul>
 		<li><i>Email</i>: {{leader.email }}</li>
 		<li><i>Phone</i>: {{leader.phone }}</li>
-		<li><i>Street address</i>: {{leader.address }}, {{leader.city}}, OH {{leader.zip}}</li>
+		<li><i>Street address</i>:{% if leader.address %} {{leader.address }}, {{leader.city}}, OH {{leader.zip}} {% endif %}</li>
 	</ul>
 
 	

@@ -6,15 +6,38 @@
 	<h1 class="formheader">House District {{housedistrict.number}}</h1>
 
 	<img class="districtpic" src="{% static 'intelview/DistrictPics/'%}HD{{housedistrict.number}}.png">
+	
+		<div class="legsidebar" style="margin-left: 30px; margin-bottom: 20px"><b>Represented in 2014 by</b>:<a href="{% url 'RepresentativeView' representative.id %}"><br>Rep. {{representative.firstname}} {{representative.lastname}} ({{representative.party}})</a></p>
+	<img class = "legsmallpic" src="{% static 'intelview/HousePics/'%}{{representative.lastname}}Rep{{representative.party}}.jpg"></div>
 	<br><br><br>
 
 	<div id = "bluebackground" class="districtinfo">
+	
+	
 		<p><b>In region</b>: <a href="{% url 'regionView' housedistrict.region.id %}">{{housedistrict.region.name}}</a></p>
 		<p><br><b>Nested in:</b> <a href="{% url 'SDView' housedistrict.nestedInSD.id %}">Senate District {{housedistrict.nestedInSD.number}}</a></p>
+
+		<p><br><b>Spans counties:</b>
+		{% for c in housedistrict.counties.all %}
+		<a href="{% url 'countyView' c.id %}">{{c.name}}</a> -
+		{% endfor %}</p>
+		
+		<p><br><b>Spans cities:</b>
+		{% for c in housedistrict.cities.all %}
+		<a href="{% url 'cityView' c.id %}">{{c.name}}</a> -
+		{% endfor %}</p>
+
+		<p><br><b>Democratic Performance Index (DPI)</b>: {{housedistrict.DPI}}</p>
+
+		<p><br><b>Faith leaders in this district:</b> {% for l in housedistrict.leader_set.all %}{% if l.faithleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}} ({{l.denomination}})</a> - {% endif %}{% endfor %}</p>
+		
+		<p><br><b>Volunteer leaders in this district:</b> {% for l in housedistrict.leader_set.all %}{% if l.volunteerleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}}</a> - {% endif %}{% endfor %}</p>
+
+
+
 	</div>
 
-	<div class="legsidebar"><b>Represented in 2014 by</b>:<a href="{% url 'RepresentativeView' representative.id %}"><br>Rep. {{representative.firstname}} {{representative.lastname}} ({{representative.party}})</a></p>
-	<img class = "legsmallpic" src="{% static 'intelview/HousePics/'%}{{representative.lastname}}Rep{{representative.party}}.jpg"></div>
+
 
 </div>
 

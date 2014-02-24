@@ -9,6 +9,12 @@
 	<p><br><br><b>Region</b>: <a href="{% url 'regionView' city.region.id %}">{{city.region.name}}</a></p>
 	<p><br><b>In Counties:</b> <a href="{% url 'countyView' city.county.id %}">{{city.county.name}}</a></p>
 	<p><br><b>Population:</b> {{city.population}}
+	<p><br><b>Overlaps Senate District(s):</b> {% for sd in city.senatedistrict_set.all %}<a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a> - {% endfor %}</p>
+	<p><br><b>Overlaps House District(s):</b> {% for hd in city.housedistrict_set.all %}<a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a> - {% endfor %}</p>
+	
+	<p><br><b>Faith leaders in this city:</b> {% for l in city.leader_set.all %}{% if l.faithleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}} ({{l.denomination}})</a> - {% endif %}{% endfor %}</p>
+	
+	<p><br><b>Volunteer leaders in this city:</b> {% for l in city.leader_set.all %}{% if l.volunteerleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}}</a> - {% endif %}{% endfor %}</p>	
 
 </div>
 

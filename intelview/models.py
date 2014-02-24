@@ -42,20 +42,19 @@ class SenateDistrict(models.Model):
 	number = models.IntegerField()
 	shortcode = models.CharField(max_length=4)
 	region = models.ForeignKey(Region)
-	DPI = models.CharField(max_length=7, default = [])
+	DPI = models.CharField(max_length=20, default = [])
 	cities = models.ManyToManyField(City, default = [])
 	counties = models.ManyToManyField(County, default = [])
 	
 	def __unicode__(self):
 		return self.shortcode
 
-
 class HouseDistrict(models.Model):
 	number = models.IntegerField()
 	shortcode = models.CharField(max_length=4)
 	region = models.ForeignKey(Region)
 	nestedInSD = models.ForeignKey(SenateDistrict)
-	DPI = models.CharField(max_length=7, default = [])
+	DPI = models.CharField(max_length=20, default = [])
 	cities = models.ManyToManyField(City, default =[])
 	counties = models.ManyToManyField(County, default = [])
 
@@ -188,8 +187,8 @@ class Leader(models.Model):
 	county = models.ForeignKey(County, default ="")
 	zip = models.CharField(max_length=12, default = "")
 	region = models.ForeignKey(Region, default ="")
-#	inSD = models.ForeignKey(SenateDistrict, default ="")
-#	inHD = models.ForeignKey(HouseDistrict, default ="")
+	SDs = models.ManyToManyField(SenateDistrict, default = [])
+	HDs = models.ManyToManyField(HouseDistrict, default = [])
 	communityleader = models.IntegerField(max_length=1)
 	faithleader = models.IntegerField(max_length=1)
 	volunteerleader = models.IntegerField(max_length=1)

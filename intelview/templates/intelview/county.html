@@ -7,11 +7,16 @@
 	<br><img class="districtpic" src="{% static 'intelview/CountyPics/'%}{{lowername}}.gif">
 
 	<p><br><br><b>Region</b>: <a href="{% url 'regionView' county.region.id %}">{{county.region.name}}</a></p>
-	<p><br><b>Major cities:</b> {{county.cities}}</p>
-	<p><br><b>Senate District(s):</b> {{county.HDs}}
-	<p><br><b>House District(s):</b> {{county.SDs}}
+	<p><br><b>Major cities:</b> {% for city in cities%}<a href="{% url 'cityView' city.id %}">{{city.name}}</a> - {% endfor %}</p>
+	<p><br><b>Overlaps Senate District(s):</b> {% for sd in county.senatedistrict_set.all %}<a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a> - {% endfor %}</p>
+	<p><br><b>Overlaps House District(s):</b> {% for hd in county.housedistrict_set.all %}<a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a> - {% endfor %}</p>
 	
+
+	<p><br><b>Faith leaders in this county:</b> {% for l in county.leader_set.all %}{% if l.faithleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}} ({{l.denomination}})</a> - {% endif %}{% endfor %}</p>
 	
+	<p><br><b>Volunteer leaders in this county:</b> {% for l in county.leader_set.all %}{% if l.volunteerleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}}</a> - {% endif %}{% endfor %}</p>
+
+		
 </div>
 
  {% endblock%}

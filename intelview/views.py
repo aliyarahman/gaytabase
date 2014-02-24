@@ -96,7 +96,8 @@ def regionView(request, region_id):
 def countyView(request, county_id):
 	county = get_object_or_404(County, pk=county_id)
 	lowername = county.name.lower().replace(" ","")
-	return render(request, "county.html", {'county': county, 'lowername':lowername})
+	cities = City.objects.filter(county=county)
+	return render(request, "county.html", {'county': county, 'lowername':lowername, 'cities':cities})
 
 @login_required
 def cityView(request, city_id):
