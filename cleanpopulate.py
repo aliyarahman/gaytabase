@@ -8,7 +8,7 @@
 #Note that syncdb ONLY adds new tables. Does not modify existing tables. SQLclear command isn't doing it either.
 
 import os
-from intelview.models import Region, County, City, Senator, Representative, HouseDistrict, SenateDistrict, Business, Leader
+from intelview.models import Region, County, City, Senator, Representative, HouseDistrict, SenateDistrict, Business, Leader, Organization
 from django.contrib.auth.models import User
 import csv
 
@@ -126,7 +126,6 @@ for row in reader:
 	c.save()
 
 
-
 #Add SDs
 NEsds = [13,18,21,22,23,24,25,27,28,29,32,33]
 NWsds = [1,2,11,12,14,26]
@@ -169,7 +168,6 @@ for row in reader:
 			SD.counties.add(county)
 	SD.save()
 	SD = SenateDistrict.objects.get(number=row[0])
-	print len(SD.counties.all())
 	for county in SD.counties.all():
 		cities = City.objects.filter(county = county)
 		for city in cities:
@@ -203,10 +201,8 @@ ifile = open('HD_data.csv', "rb")
 reader = csv.reader(ifile)
 for row in reader:
 	HD = HouseDistrict.objects.get(number=row[0])
-	print HD.shortcode
 	for i in range(5,11):
 		if row[i] != "":
-			print row[i]
 			county = County.objects.get(name=row[i])
 			HD.counties.add(county)
 	HD.save()
@@ -323,6 +319,29 @@ for row in reader:
 		otherNotes=otherNotes+row[15]
 	v = Leader(lastname = row[0], firstname = row[1], organizations = row[2], denomination = row[3], region=region, address = row[5], city = city, county = county, zip = row[7], title = row[8], email = row[9], phone = row[10], signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =0, volunteerleader =1, businessleader =0)
 	v.save()
+
+
+#Add business leaders
+ifile = open('businessleaders.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	otherNotes = " "
+	city = City.objects.get(name = row[4])
+	county = city.county
+	region = city.region
+	zip = ""
+	email = ""
+	phone = ""
+	denomination=""
+	address = ""
+	if row[5]=='Yes':
+		signedENDA = 1
+	else:
+		signedENDA = 0
+	b = Leader(lastname = row[1], firstname = row[0], organizations = row[3], denomination = denomination, region=region, address = address, city = city, county = county, zip = zip, title = row[2], email = email, phone = phone, signedENDA = signedENDA, otherNotes=otherNotes, communityleader =0, faithleader =0, volunteerleader =0, businessleader =1)
+	b.save()
+	
+#Assign leaders to districts
 leaders = Leader.objects.all()
 for l in leaders:
 	for hd in l.county.housedistrict_set.all():
@@ -330,3 +349,56 @@ for l in leaders:
 	for sd in l.county.senatedistrict_set.all():
 		l.SDs.add(sd)
 	l.save()
+
+
+#Add organizations
+ifile = open('organizations.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	otherNotes = "Main point of contact is "+row[3]+" "+row[4]+" ("+row[5]+")"
+	o = Organization(name = row[0], LocalStateNationalAffinity = row[1], otherNotes = otherNotes,progressiveOrg = row[7], affinityGroup = row[8], conservativeOrg=row[9], nonprofitOrg = row[10])
+	o.save()
+ifile = open('organizations.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	o = Organization.objects.get(name = row[0])
+	city = City.objects.get(name = row[2])
+	o.cities.add(city)
+	o.counties.add(city.county)
+	o.regions.add(city.region)
+	if Leader.objects.filter(firstname = row[3], lastname = row[4]):
+		l = Leader.objects.get(firstname = row[3], lastname = row[4])
+		o.primaryContact.add(l)
+	for c in o.counties.all():
+		for hd in c.housedistrict_set.all():
+			o.inHDs.add(hd)
+		for sd in c.senatedistrict_set.all():
+			o.inSDs.add(sd)
+	o.save()
+
+
+#Add small businesses
+ifile = open('businesses.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	if row[5]=="Yes":
+		signedENDA = 1
+	else:
+		signedENDA = 0
+	pointOfContact = row[2]+" "+row[3]
+	b = Business(name = row[0], pointOfContact = pointOfContact, titleOfContact=row[4], signedENDA=signedENDA, smallBusiness=row[6],corporate = row[7], jobsOhio = row[8])
+	b.save()
+ifile = open('businesses.csv', "rb")
+reader = csv.reader(ifile)
+for row in reader:
+	b = Business.objects.get(name = row[0])
+	city = City.objects.get(name = row[1])
+	b.cities.add(city)
+	b.counties.add(city.county)
+	b.regions.add(city.region)
+	for c in b.counties.all():
+		for hd in c.housedistrict_set.all():
+			b.inHDs.add(hd)
+		for sd in c.senatedistrict_set.all():
+			b.inSDs.add(sd)
+	b.save()

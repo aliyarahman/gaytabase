@@ -35,7 +35,9 @@
 		
 		<p><br><b>Volunteer leaders in this district:</b> {% for l in senatedistrict.leader_set.all %}{% if l.volunteerleader == 1 %}<a href="{% url 'leaderView' l.id %}">{{l.firstname}} {{l.lastname}}</a> - {% endif %}{% endfor %}</p>
 
+		<p><br><b>Groups and organizations based (or with main Ohio operations) in this district:</b> {% for o in senatedistrict.organization_set.all %}<a href="{% url 'organizationView' o.id %}">{{o.name}}</a> - {% endfor %}</p>
 
+		<p><br><b>Businesses with headquarters in this district:</b> {% for b in senatedistrict.business_set.all %}<a href="{% url 'businessView' b.id %}">{{b.name}}</a> - {% endfor %}</p>
 
 	</div>
 

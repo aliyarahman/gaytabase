@@ -7,20 +7,50 @@
 		<h2>{{organization.name}}</h2>
 	</div>
 	
-	<div>
-	{% if organization.ally == 1 %}
+
+	<div><ul>
+	{% if organization.LocalStateNationalAffinity == "L" %}
+		<li>Local-level reach</b>
+	{% endif %}
+	{% if organization.LocalStateNationalAffinity == "S" %}
+		<li>Statewide reach</b>
+	{% endif %}
+	{% if organization.LocalStateNationalAffinity == "N" %}
+		<li>National reach</b>
+	{% endif %}
+	</ul></div>
+
+	<div><ul>
+	{% if organization.progressiveOrg == 1 %}
 		<li>Progressive ally organization</b>
 	{% endif %}
-	{% if organization.affinitygroup == 1 %}
+	{% if organization.affinityGroup == 1 %}
 		<li>Equality Ohio affinity group</b>
 	{% endif %}
-	</div>
+	{% if organization.nonprofitOrg == 1 %}
+		<li>Active nonprofit organization without ties to EO</b>
+	{% endif %}
+	{% if organization.conservative == 1 %}
+		<li>Conservative group</b>
+	{% endif %}
+	</ul></div>
 	
+
 	<br><br>
-	<p><b>Region</b>: {{organization.region}}</p>
-	<p><b>Located in counties</b>: {{organization.county}}</p>
-	<p><b>Located in cities</b>: {{organization.city}}</p>
-	
+	<p><b>Located in</b>
+	<ul>
+		<li><i>Regions</i>: {% for r in organization.regions.all %}<a href="{% url 'regionView' r.id %}"> {{r.name}}</a> {% endfor %}</li>
+		<li><i>County</i>: {% for c in organization.counties.all %}<a href="{% url 'countyView' c.id %}"> {{c.name}}</a> {% endfor %}</li>
+		<li><i>City (Ohio base)</i>: {% for c in organization.cities.all %}<a href="{% url 'cityView' c.id %}"> {{c.name}}</a> {% endfor %}</li>
+	</ul></p>
+
+
+	<br><p><b>Primary Contact in Gaytabase</b>:{% for p in organization.primaryContact.all %} <a href="{% url 'leaderView' p.id %}">{{p.firstname}} {{p.lastname}}</a>{% endfor %}
+	</p>
+
+	<br><p><b>Notes</b></p>
+	<p>{{organization.otherNotes}}</p>
+
 
 </div>
 {% endblock%}

@@ -5,13 +5,40 @@
 <div class="contentholder">
 	<h1 class="formheader">{{business.name}}</h2>
 	<img class="districtpic" src="{% static 'intelview/BusinessPics/'%}{{business.name}}.png">
-	<p><br><br><br><br><b>Region:</b> {{business.region}}</p>
-	<p><br><b>Has offices in cities:</b>{{business.cities}}</p>
-	<p><br><b>Senate District(s):</b>
-	<p><br><b>House District(s):</b></p>
-	<p><br><b>Has donated to:</b> 
-	
-	
+
+	<br><p><b>JobsOhio company?: </b>{% if business.jobsOhio == 1 %}Yes{% endif %}{% if business.jobsOhio == 0 %}No{% endif %}</p>
+
+	<p><br><br><b>Has main offices in:</b>
+		<ul>
+			<li><b>Regions</b>: {% for r in business.regions.all %}<a href="{% url 'regionView' r.id %}">{{r.name}}</a> - {% endfor %}</li>
+		</ul>
+		<ul>
+			<li><b>Counties</b>: {% for c in business.counties.all %}<a href="{% url 'countyView' c.id %}">{{c.name}}</a> - {% endfor %}</li>
+		</ul>
+		<ul>
+			<li><b>Cities</b>: {% for c in business.cities.all %}<a href="{% url 'cityView' c.id %}">{{c.name}}</a> - {% endfor %}</li>
+		</ul>
+		<ul>
+			<li><b>Senate Districts</b>: {% for sd in business.inSDs.all %}<a href="{% url 'SDView' sd.id %}">SD {{sd.number}}</a> - {% endfor %}</li>
+		</ul>
+		<ul>
+			<li><b>House Districts</b>: {% for hd in business.inHDs.all %}<a href="{% url 'HDView' hd.id %}">HD {{hd.number}}</a> - {% endfor %}</li>
+		</ul>		
+	</p>
+		
+	<br><p><b>CEO or Point of Contact</b>: {{business.pointOfContact}} ({{business.titleOfContact}})</p>
+
+	<br><p><b>Has donated to:</b></p>
+
+	<p><br><b>LGBT issue ally indicators </b>
+		<ul>
+			<li><b>Signed a letter of support for ENDA?</b>: {% if business.signedENDA == 1 %}Yes{% else %}No{% endif %}</li>
+			<li><b>HRC score</b>: {% if business.HRCscore == 0 %}None{% else %}{{business.HRCscore}}{% endif %}</li>
+			<li><b>Nondiscrimination policy includes SO?</b>: {% if business.hasSOnondiscrim == 1 %}Yes{% elif business.hasSOnondiscrim == 0 %}No{% else %}Unknown{% endif %}</li>
+			<li><b>Nondiscrimination policy includes GI?</b>: {% if business.hasGInondiscrim == 1 %}Yes{% elif business.hasSOnondiscrim == 0 %}No{% else %}Unknown{% endif %}</li>
+			<li><b>Offers domestic partner benefits for same-sex partners?</b>: {% if business.hasSSDPBenefits == 1 %}Yes{% elif business.hasSOnondiscrim == 0 %}No{% else %}Unknown{% endif %}</li>
+		</ul>		
+	</p>	
 </div>
 
 {% endblock%}

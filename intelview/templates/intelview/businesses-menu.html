@@ -5,6 +5,15 @@
 	<div class="formheader"><h2>Businesses</h2></div>
 		<div class="menupage">
 
+
+		<p><br><br><b>Small businesses with links to EO</b></p>
+				{% for business in businesses %}
+					{% if business.signedENDA == 1 %}
+							<a href="{% url 'businessView' business.id %}">{{business.name}}</a> - 
+					{% endif %}
+				{% endfor %}
+
+
 		<p><br><br><b>JobsOhio corporations</b></p>
 				{% for business in businesses %}
 					{% if business.jobsOhio == 1 %}
@@ -12,16 +21,11 @@
 					{% endif %}
 				{% endfor %}
 
-		<p><br><br><b>ENDA supportive small businesses</b></p>
+		<p><br><br><b>Other corporations</b></p>
 				{% for business in businesses %}
-					{% if business.signedENDA == 1 %}
-							<a href="{% url 'businessView' business.id %}">{{business.name}}</a> - 
+					{% if business.corporate == 1 %}
+						<a href="{% url 'businessView' business.id %}">{{business.name}}</a> - 
 					{% endif %}
-				{% endfor %}
-
-		<p><br><br><b>All businesses</b></p>
-				{% for business in businesses %}
-					<a href="{% url 'businessView' business.id %}">{{business.name}}</a> - 
 				{% endfor %}
 				
 		</div>

@@ -31,8 +31,11 @@
 		<li><i>Lay or clergy?</i>: {{leader.title}}</li>
 		<li><i>Signed ENDA support letter?</i>: {% if leader.signedENDA == 1 %}Yes{% else %}No {% endif %}</li>
 	</ul>
+	{% elif leader.businessleader == 1 %}
+		<br><p><b>Business leader at</b>: {{leader.organizations}} </p>
 	{% else %}
-		<br><p><b>Works with group</b>: {{leader.organizations}}</b></p>
+		<br><p><b>Works with groups/organizations</b>: {{leader.organizations}}</b></p>
+		<p><b>Affiliated with groups/organizations in Gaytabase</b>:{% for o in leader.organization_set.all %} <a href="{% url 'organizationView' o.id %}">{{o.name}}</a> - {% endfor %}</p>
 	{% endif %}
 
 	

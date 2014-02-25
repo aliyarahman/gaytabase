@@ -7,29 +7,29 @@
 
 		<p><br><br><b>Affinity groups</b></p>
 				{% for organization in organizations %}
-					{% if organization.name == "SHADES" %}
+					{% if organization.affinityGroup == 1 %}
 						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}
 
-		<p><br><br><b>Nonprofits</b></p>
+		<p><br><br><b>Progressive ally organizations</b></p>
 				{% for organization in organizations %}
-					{% if organization.name == "PFLAG" or organization.name = "Citizens for Community Values" %}
+					{% if organization.progressiveOrg == 1 %}
 						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}
 
-		<p><br><br><b>Progressive allies</b></p>
+		<p><br><br><b>Active nonprofits without ties to Equality Ohio</b></p>
 				{% for organization in organizations %}
-					{% if organization.ally == 1 %}
+					{% if organization.nonprofitOrg == 1 %}
 						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}
 				
 				
-		<p><br><br><b>Conservatives</b></p>
+		<p><br><br><b>Conservative organizations</b></p>
 				{% for organization in organizations %}
-					{% if organization.name == "Citizens for Community Values" %}
+					{% if organization.conservativeOrg == 1 %}
 						<a href="{% url 'organizationView' organization.id %}">{{organization.name}}</a> - 
 					{% endif %}
 				{% endfor %}				

@@ -79,7 +79,6 @@ class Senator(models.Model):
 	previousTerms = models.CharField(max_length=400, default="")
 	livesInCity = models.CharField(max_length=400, default="")
 	faithAffiliation = models.CharField(max_length=400, default="")
-	donors = models.CharField(max_length=400, default = "")
 	profession = models.CharField(max_length=400, default = "")
 	family = models.CharField(max_length=400, default = "")
 	college = models.CharField(max_length=400, default = "")
@@ -113,7 +112,6 @@ class Representative(models.Model):
 	termLimit = models.IntegerField(max_length=4, default=0)
 	previousTerms = models.CharField(max_length=400, default = "")
 	faithAffiliation = models.CharField(max_length=400, default = "")
-	donors = models.CharField(max_length=400, default = "")
 	profession = models.CharField(max_length=400, default = "")
 	family = models.CharField(max_length=400, default = "")
 	college = models.CharField(max_length=400, default = "")
@@ -132,44 +130,24 @@ class Representative(models.Model):
 
 class Business(models.Model):
 	name = models.CharField(max_length=45, unique = True)
-	description = models.CharField(max_length=400)
-	LGBTowned = models.IntegerField(max_length=1, default = 2)
-	#LGBTowned codes for businesses: #0 = No, #1 = Yes, #2 = Unknown
-	CEO = models.CharField(max_length=400)
-	peopleConnections = models.CharField(max_length=400)
-	regions = models.ManyToManyField(Region)
+	regions = models.ManyToManyField(Region, default = [])
+	cities = models.ManyToManyField(City, default = [])
 	counties = models.ManyToManyField(County, default = [])
-	cities = models.ManyToManyField(City)
 	inSDs = models.ManyToManyField(SenateDistrict)
 	inHDs = models.ManyToManyField(HouseDistrict)
-	donatedToSenators = models.ManyToManyField(Senator)
-	donatedToSenators = models.ManyToManyField(Representative)
-	signedENDA = models.IntegerField(max_length=1)
-	jobsOhio =models.IntegerField(max_length=1)
-	hasSOnondiscrim = models.IntegerField(max_length=1)
-	hasGInondiscrim = models.IntegerField(max_length=1)
-	hasSSDPBenefits = models.IntegerField(max_length=1)
-	HRCscore = models.IntegerField(max_length=3)
-	otherNotes = models.CharField(max_length=400)
-
-	def __unicode__(self):
-		return self.name
-
-
-class Organization(models.Model):
-	name = models.CharField(max_length=45, unique = True)
-	LocalStateNationalAffinity = models.CharField(max_length=4, default = "")
 	description = models.CharField(max_length=400, default = "")
-	progressiveOrg = models.IntegerField(max_length=1, default =0)
-	affinityGroup = models.IntegerField(max_length=1, default =0)
-	nonprofitOrg = models.IntegerField(max_length=1, default =0)
-	conservativeOrg = models.IntegerField(max_length=1, default =0)			
-	primaryContact = models.CharField(max_length=400, default = "")
-	regions = models.ManyToManyField(Region, default = [])
-	counties = models.ManyToManyField(County, default = [])
-	cities = models.ManyToManyField(City, default = [])
-	inSDs = models.ManyToManyField(SenateDistrict, default = [])
-	inHDs = models.ManyToManyField(HouseDistrict, default = [])
+	LGBTowned = models.IntegerField(max_length=1, default = 2)
+	#LGBTowned codes for businesses: #0 = No, #1 = Yes, #2 = Unknown
+	pointOfContact = models.CharField(max_length=400, default="")
+	titleOfContact = models.CharField(max_length=100, default="")
+	signedENDA = models.IntegerField(max_length=1, default = 0)
+	jobsOhio =models.IntegerField(max_length=1, default = 2)
+	smallBusiness =models.IntegerField(max_length=1, default = 2)	
+	corporate =models.IntegerField(max_length=1, default = 2)	
+	hasSOnondiscrim = models.IntegerField(max_length=1, default = 2)
+	hasGInondiscrim = models.IntegerField(max_length=1, default = 2)
+	hasSSDPBenefits = models.IntegerField(max_length=1, default = 2)
+	HRCscore = models.IntegerField(max_length=3, default = 0)
 	otherNotes = models.CharField(max_length=400, default = "")
 
 	def __unicode__(self):
@@ -198,5 +176,38 @@ class Leader(models.Model):
 	otherNotes = models.CharField(max_length=400, default ="")
 	signedENDA = models.IntegerField(max_length=1)
 	
+	def __unicode__(self):
+		return self.firstname
+
+
+class Organization(models.Model):
+	name = models.CharField(max_length=45, unique = True)
+	LocalStateNationalAffinity = models.CharField(max_length=4, default = "")
+	description = models.CharField(max_length=400, default = "")
+	progressiveOrg = models.IntegerField(max_length=1, default =0)
+	affinityGroup = models.IntegerField(max_length=1, default =0)
+	nonprofitOrg = models.IntegerField(max_length=1, default =0)
+	conservativeOrg = models.IntegerField(max_length=1, default =0)			
+	primaryContact = models.ManyToManyField(Leader, default = [])
+	regions = models.ManyToManyField(Region, default = [])
+	counties = models.ManyToManyField(County, default = [])
+	cities = models.ManyToManyField(City, default = [])
+	inSDs = models.ManyToManyField(SenateDistrict, default = [])
+	inHDs = models.ManyToManyField(HouseDistrict, default = [])
+	otherNotes = models.CharField(max_length=400, default = "")
+
+	def __unicode__(self):
+		return self.name
+
+
+class Donation(models.Model):
+	amount = models.DecimalField(max_digits = 20, decimal_places =2, default="0.00")
+	business = models.ForeignKey(City, default =[])
+	individual = models.ForeignKey(Leader, default =[])
+	toSenator = models.ForeignKey(Senator, default =[])
+	toRep = models.ForeignKey(Representative, default =[])
+	year = models.IntegerField(max_length=4, default = 2010)
+	notes = models.CharField(max_length = 400, default = "")
+
 	def __unicode__(self):
 		return self.firstname
