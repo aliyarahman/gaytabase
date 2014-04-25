@@ -125,7 +125,7 @@ class Representative(models.Model):
 	otherNotes = models.CharField(max_length=400, default = "")
 
 	def __unicode__(self):
-		return self.shortcode
+		return self.lastname
 
 
 class Business(models.Model):
