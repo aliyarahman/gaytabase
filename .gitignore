@@ -11,10 +11,11 @@ intelview/*.pyc
 gaytabase/*.pyc
 populate_db.py
 todo*
-gaytabase/settings.py
+gaytabase/settings_hidden.py
 productionsettings.py
 add_counties.py
 static/*
 csvdata/
 intelview/static/*
 intelview/admin/*
+venv
