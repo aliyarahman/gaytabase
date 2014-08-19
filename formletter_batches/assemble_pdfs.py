@@ -1,5 +1,6 @@
 # This is the pyPdf library. Install with: $ pip install pyPdf
 from pyPdf import PdfFileWriter, PdfFileReader
+import csv
 
 # Generate a list of batchnames to loop through later
 batchnames = []
