@@ -13,10 +13,12 @@ for i in range(1,100):
       outputfilename = "HD"+str(i)+".pdf"
       for b in batchnames:
          input_pdf = PdfFileReader(file(b, "rb"))
-         for row in google_doc_dump:
-	     if row[0] == b:
-                if row[7]== i:
-	        output.addPage(input_pdf.getPage(int(row[1]))
+         with open('google_doc_dump.csv', 'rb') as csvfile:
+	    google_doc_dump = csv.reader(csvfile, delimiter=',', quotechar='"')
+            for row in google_doc_dump:
+	       if row[0] == b:
+                  if row[7]== i:
+	             output.addPage(input_pdf.getPage(int(row[1]))
       outputStream = file(outputfilename, "wb")
       output.write(outputStream)
       outputStream.close()
@@ -29,10 +31,12 @@ for i in range(1,34):
       outputfilename = "SD"+str(i)+".pdf"
       for b in batchnames:
          input_pdf = PdfFileReader(file(b, "rb"))
-         for row in google_doc_dump:
-        if row[0] == b:
-                if row[7]== i:
-           output.addPage(input_pdf.getPage(int(row[1]))
+         with open('google_doc_dump.csv', 'rb') as csvfile:
+            google_doc_dump = csv.reader(csvfile, delimiter=',', quotechar='"')
+            for row in google_doc_dump:
+               if row[0] == b:
+                  if row[7]== i:
+                     output.addPage(input_pdf.getPage(int(row[1]))
       outputStream = file(outputfilename, "wb")
       output.write(outputStream)
       outputStream.close()
