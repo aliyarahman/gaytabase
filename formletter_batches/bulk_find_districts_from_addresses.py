@@ -39,16 +39,14 @@ with open('csvs/geocoded_letter_data.csv', 'rb') as csvfile, open('csvs/district
             url = "http://openstates.org/api/v1//legislators/geo/?lat="+str(lat)+"&long="+str(lng)+"&apikey="+SUNLIGHT_API_KEY
             r = requests.get(url)
             results = r.json()
-            if results[0]['chamber'] == 'upper':
-               HD = results[1]['district']
-               Rep = results[1]['last_name']
-               SD = results[0]['district']
-               Sen = results[0]['last_name']
-            else:
-               HD = results[0]['district']
-               Rep = results[0]['last_name']
-               SD = results[1]['district']
-               Sen = results[1]['last_name']
+            print len(results)
+            for result in results:
+               if result['chamber'] == 'upper':
+                  SD = result['district']
+                  Sen = result['last_name']
+               else:
+                  HD = result['district']
+                  Rep = result['last_name']
             print HD, Rep, SD, Sen
          district_writer.writerow([row[0],row[1], row[2],row[3],row[4], row[5], row[6], row[7], row[8], HD, Rep, SD, Sen])
 

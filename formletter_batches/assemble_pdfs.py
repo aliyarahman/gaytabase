@@ -19,12 +19,14 @@ for i in range(1,100):
             for row in district_reader:
                if row[0] == b:
                   if row[11]== str(i):
+                    print row[11], str(i)
                     output.addPage(input_pdf.getPage(int(row[1])))
+                    print "Added a page from HD "+str(i)
                if output.getNumPages() >0:
                   outputStream = file(outputfilename, "wb")
                   output.write(outputStream)
                   outputStream.close()
-                  print "There are %s form letters in %s " % (output.getNumPages(), outputfilename)
+#                  print "There are %s form letters in %s " % (output.getNumPages(), outputfilename)
 
 '''
 # Loop through SenateDistricts
