@@ -8,6 +8,7 @@ total_batches = input("How many batches of pdfs do you have?: ")
 for i in range(1, total_batches+1):
    batchnames.append("batch"+str(i)+".pdf")
 
+
 # Loop through HouseDistricts
 for i in range(1,100):
       output = PdfFileWriter()
@@ -18,17 +19,15 @@ for i in range(1,100):
             district_reader = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in district_reader:
                if row[0] == b:
-                  if row[11]== str(i):
-                    print row[11], str(i)
-                    output.addPage(input_pdf.getPage(int(row[1])))
-                    print "Added a page from HD "+str(i)
-               if output.getNumPages() >0:
-                  outputStream = file(outputfilename, "wb")
-                  output.write(outputStream)
-                  outputStream.close()
-#                  print "There are %s form letters in %s " % (output.getNumPages(), outputfilename)
+                  if row[9]== str(i):
+                    output.addPage(input_pdf.getPage(int(row[1])-1))
+      if output.getNumPages() >0:
+         outputStream = file(outputfilename, "wb")
+         output.write(outputStream)
+         outputStream.close()
+         print "There are %s form letters from %s " % (output.getNumPages(), outputfilename)
 
-'''
+
 # Loop through SenateDistricts
 for i in range(1,34):
       output = PdfFileWriter()
@@ -36,13 +35,13 @@ for i in range(1,34):
       for b in batchnames:
          input_pdf = PdfFileReader(file("pdfs/"+b, "rb"))
          with open('csvs/district_data.csv', 'rb') as csvfile:
-            google_doc_dump = csv.reader(csvfile, delimiter=',', quotechar='"')
-            for row in google_doc_dump:
+            district_reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+            for row in district_reader:
                if row[0] == b:
-                  if row[13]== str(i):
-                     output.addPage(input_pdf.getPage(int(row[1])))
-      outputStream = file(outputfilename, "wb")
-      output.write(outputStream)
-      outputStream.close()
-      print "There are %s form letters in %s " % (output.getNumPages(), outputfilename)
-'''
+                  if row[11]== str(i):
+                    output.addPage(input_pdf.getPage(int(row[1])-1))
+      if output.getNumPages() >0:
+         outputStream = file(outputfilename, "wb")
+         output.write(outputStream)
+         outputStream.close()
+         print "There are %s form letters from %s " % (output.getNumPages(), outputfilename)
