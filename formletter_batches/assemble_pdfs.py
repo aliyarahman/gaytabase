@@ -11,10 +11,10 @@ for i in range(1, total_batches+1):
 # Loop through HouseDistricts
 for i in range(1,100):
       output = PdfFileWriter()
-      outputfilename = "HD"+str(i)+".pdf"
+      outputfilename = "pdfs/HD"+str(i)+".pdf"
       for b in batchnames:
-         input_pdf = PdfFileReader(file(b, "rb"))
-         with open('google_doc_dump.csv', 'rb') as csvfile:
+         input_pdf = PdfFileReader(file("pdfs/"+b, "rb"))
+         with open('csvs/google_doc_dump.csv', 'rb') as csvfile:
 	    google_doc_dump = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in google_doc_dump:
 	       if row[0] == b:
@@ -29,10 +29,10 @@ for i in range(1,100):
 # Loop through SenateDistricts
 for i in range(1,34):
       output = PdfFileWriter()
-      outputfilename = "SD"+str(i)+".pdf"
+      outputfilename = "pdfs/SD"+str(i)+".pdf"
       for b in batchnames:
-         input_pdf = PdfFileReader(file(b, "rb"))
-         with open('google_doc_dump.csv', 'rb') as csvfile:
+         input_pdf = PdfFileReader(file("pdfs/"+b, "rb"))
+         with open('csvs/google_doc_dump.csv', 'rb') as csvfile:
             google_doc_dump = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in google_doc_dump:
                if row[0] == b:

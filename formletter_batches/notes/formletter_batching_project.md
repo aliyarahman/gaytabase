@@ -1,7 +1,7 @@
 
 Resource estimate based on test batch:
 - 92 pages/letters at 3.1 MB, so for 7000 letters estimate 240-260MB.
-- It took me _____ to record names and addresses (only) for 92 letters. Estimate then ___ hrs of staff time to enter all (doesn't include VAN entry, but that could be bulk).
+- It took me 11 mins to record names and addresses (only) for 20 letters, including some Googling. Estimate then 60 to 65 hrs of staff time to enter all (doesn't include VAN entry, but that could be bulk) into the Google doc.
 - With batches of 80-100, estimate 70 batches.
 
 
